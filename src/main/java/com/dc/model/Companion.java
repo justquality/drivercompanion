@@ -23,21 +23,13 @@ public class Companion {
 	@JoinColumn(name = "ID_USER")
 	private User user;
 	
-	@Column(name = "FIRST_NAME")
-	private String firstName;
-	
-	@Column(name = "LAST_NAME")
-	private String lastName;
-	
 	@Column(name = "RATING")
 	private Float rating;
 
 	public Companion() {}
 	
-	public Companion(User user, String firstName, String lastName, Float rating) {
+	public Companion(User user, Float rating) {
 		this.user = user;
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.rating = rating;
 	}
 
@@ -55,22 +47,6 @@ public class Companion {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public Float getRating() {

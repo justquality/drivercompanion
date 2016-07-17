@@ -1,5 +1,8 @@
 package com.dc.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dc.model.Companion;
+import com.dc.model.Driver;
+import com.dc.model.Role;
 import com.dc.model.User;
+import com.dc.repository.CompanionRepository;
+import com.dc.repository.DriverRepository;
+import com.dc.repository.RoleRepository;
 import com.dc.service.SecurityService;
 import com.dc.service.UserService;
 import com.dc.validator.UserValidator;
@@ -18,7 +27,16 @@ public class UserController {
 	
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private RoleRepository roleRepository;
 
+    @Autowired
+    private DriverRepository driverRepository;
+    
+    @Autowired
+    private CompanionRepository companionRepository;
+    
     @Autowired
     private SecurityService securityService;
 
@@ -28,7 +46,6 @@ public class UserController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-
         return "registration";
     }
 
@@ -36,12 +53,28 @@ public class UserController {
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
         userValidator.validate(userForm, bindingResult);
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors())
             return "registration";
-        }
 
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleRepository.findOne((long) 4));	// ROLE_USER
+        if (userForm.getUserType().equals("driver")) {
+    		roles.add(roleRepository.findOne((long) 2));	// ROLE_DRIVER
+    		userForm.setRoles(roles);
+    		
+    		Driver driver = new Driver();
+    		driver.setUser(userForm);
+    		driverRepository.save(driver);
+    	} else if (userForm.getUserType().equals("companion")) {
+    		roles.add(roleRepository.findOne((long) 3));	// ROLE_COMPANION
+    		userForm.setRoles(roles);
+    		
+    		Companion companion = new Companion();
+    		companion.setUser(userForm);
+    		companionRepository.save(companion);
+    	}
+        
         userService.save(userForm);
-
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
         return "redirect:/home";

@@ -25,6 +25,12 @@ public class User {
 	@Column(name = "USERNAME")
 	private String username;
 	
+	@Column(name = "FIRST_NAME")
+	private String firstName;
+	
+	@Column(name = "LAST_NAME")
+	private String lastName;
+	
 	@Column(name = "EMAIL")
 	private String email;
 	
@@ -34,6 +40,9 @@ public class User {
 	@Transient
 	private String passwordConfirm;
 	
+	@Transient
+	private String userType = "driver";
+	
 	@ManyToMany
 	@JoinTable(name = "USERS_ROLES", joinColumns = @JoinColumn(name = "ID_USER"),
 			inverseJoinColumns = @JoinColumn(name = "ID_ROLE"))
@@ -41,9 +50,11 @@ public class User {
 	
 	public User() {}
 	
-	public User(String username, String email, String password) {
+	public User(String username, String firstName, String lastName, String email, String password) {
 		super();
 		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 	}
@@ -62,6 +73,22 @@ public class User {
 	
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	public String getEmail() {
@@ -88,6 +115,14 @@ public class User {
 		this.passwordConfirm = passwordConfirm;
 	}
 	
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
 	public Set<Role> getRoles() {
         return roles;
     }

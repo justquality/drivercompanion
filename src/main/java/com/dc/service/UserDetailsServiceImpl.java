@@ -15,7 +15,7 @@ import com.dc.model.Role;
 import com.dc.model.User;
 import com.dc.repository.UserRepository;
 
-public class UserDetailsServiceImpl implements UserDetailsService{
+public class UserDetailsServiceImpl implements UserDetailsService {
 	
     @Autowired
     private UserRepository userRepository;

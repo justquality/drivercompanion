@@ -35,12 +35,6 @@ public class Driver {
 	 * 
 	 */
 	
-	@Column(name = "FIRST_NAME")
-	private String firstName;
-	
-	@Column(name = "LAST_NAME")
-	private String lastName;
-	
 	@Column(name = "EXPERIENCE")
 	private Byte experience;
 	
@@ -54,10 +48,8 @@ public class Driver {
 
 	public Driver() {}
 
-	public Driver(User user, String firstName, String lastName, Byte experience, Float rating, Set<Car> cars) {
+	public Driver(User user, Byte experience, Float rating, Set<Car> cars) {
 		this.user = user;
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.experience = experience;
 		this.rating = rating;
 		this.cars = cars;
@@ -77,22 +69,6 @@ public class Driver {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public Byte getExperience() {
