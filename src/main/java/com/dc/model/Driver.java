@@ -27,19 +27,11 @@ public class Driver {
 	@JoinColumn(name = "ID_USER")
 	private User user;
 	
-	/*
-	 * Driver driver = new Driver();
-	 * some actions with driver
-	 * driver.setUser(user);
-	 * save driver
-	 * 
-	 */
-	
 	@Column(name = "EXPERIENCE")
-	private Byte experience;
+	private Byte experience = 0;
 	
 	@Column(name = "RATING")
-	private Float rating;
+	private Float rating = (float) 0;
 	
 	@ManyToMany
 	@JoinTable(name = "DRIVERS_CARS", joinColumns = @JoinColumn(name = "ID_DRIVER"),

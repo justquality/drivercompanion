@@ -24,7 +24,7 @@ public class Companion {
 	private User user;
 	
 	@Column(name = "RATING")
-	private Float rating;
+	private Float rating = (float) 0;
 
 	public Companion() {}
 	

@@ -22,6 +22,7 @@ import com.dc.repository.RoleRepository;
 import com.dc.repository.UserRepository;
 import com.dc.service.SecurityService;
 import com.dc.service.UserService;
+import com.dc.validator.UserEditValidator;
 import com.dc.validator.UserValidator;
 
 @Controller
@@ -30,6 +31,7 @@ public class UserController {
     @Autowired private UserService 			userService;
     @Autowired private SecurityService 		securityService;
     @Autowired private UserValidator 		userValidator;
+    @Autowired private UserEditValidator 	userEditValidator;
     @Autowired private UserRepository 		userRepository;
     @Autowired private RoleRepository 		roleRepository;
     @Autowired private DriverRepository 	driverRepository;
@@ -49,22 +51,25 @@ public class UserController {
             return "registration";
 
         Set<Role> roles = new HashSet<>();
-        roles.add(roleRepository.findOne((long) 4));	// ROLE_USER
-        if (userForm.getUserType().equals("driver")) {
-    		roles.add(roleRepository.findOne((long) 2));	// ROLE_DRIVER
+        Object client = null;
+        
+        roles.add(roleRepository.findOne((long) 4));		// Add ROLE_USER
+        if (userForm.getUserType().equals("driver")) 
+        {
+    		roles.add(roleRepository.findOne((long) 2));	// Add ROLE_DRIVER
     		userForm.setRoles(roles);
-    		
-    		Driver driver = new Driver();
-    		driver.setUser(userForm);
-    		driverRepository.save(driver);
-    	} else if (userForm.getUserType().equals("companion")) {
-    		roles.add(roleRepository.findOne((long) 3));	// ROLE_COMPANION
+    		client = new Driver();
+    		((Driver) client).setUser(userForm);
+    		driverRepository.save((Driver) client);
+    	} 
+        else if (userForm.getUserType().equals("companion")) 
+    	{
+    		roles.add(roleRepository.findOne((long) 3));	// Add ROLE_COMPANION
     		userForm.setRoles(roles);
-    		
-    		Companion companion = new Companion();
-    		companion.setUser(userForm);
-    		companionRepository.save(companion);
-    	}
+    		client = new Companion();
+    		((Companion) client).setUser(userForm);
+    		companionRepository.save((Companion) client);
+    	}	
         
         userService.save(userForm);
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
@@ -107,4 +112,19 @@ public class UserController {
     	return "my-profile";
     }
     
+    @RequestMapping(value = "/my-profile", method = RequestMethod.POST)
+    public String editMyProfile(@ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+    	userEditValidator.validate(user, bindingResult);
+    	
+    	if (bindingResult.hasErrors())
+            return "redirect:/my-profile";
+    	
+    	User updateUser = userService.findByUsername(user.getUsername());
+    	updateUser.setFirstName(user.getFirstName());
+    	updateUser.setLastName(user.getLastName());
+    	updateUser.setEmail(user.getEmail());
+    	userRepository.save(updateUser);	// save without bcrypting
+    	
+    	return "redirect:/my-profile";
+    }
 }

@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -13,8 +14,7 @@
             </div>
             <div class="modal-body">
             
-            	<form:form method="POST" class="form-driver-edit">
-            		<form:hidden path="id"/>
+            	<form:form method="POST" modelAttribute="user" class="form-driver-edit">
             		<form:hidden path="username"/>
             		<spring:bind path="firstName">
 						<div class="form-group ${status.error ? 'has-error' : ''}">
@@ -39,10 +39,10 @@
 						</div>
 					</spring:bind>
 					
-					<spring:bind path="password">
+					<%-- <spring:bind path="password">
 						<div class="form-group ${status.error ? 'has-error' : ''}">
 							<form:input type="password" path="password" class="form-control"
-								placeholder="New Password" value=""></form:input>
+								placeholder="New Password"></form:input>
 							<form:errors path="password"></form:errors>
 						</div>
 					</spring:bind>
@@ -53,10 +53,9 @@
 								class="form-control" placeholder="Repeat new password"></form:input>
 							<form:errors path="passwordConfirm"></form:errors>
 						</div>
-					</spring:bind>
+					</spring:bind> --%>
 					
-					<button type="submit" class="btn btn-info">Submit changes</button>&nbsp;
-				    <button type="reset" class="btn btn-danger">Reset</button>
+					<button type="submit" class="btn btn-info">Submit changes</button>
             	</form:form>
             </div>
         </div>
@@ -106,18 +105,22 @@
                                 </tr>
                                 <tr>
                                     <td>Experience</td>
-                                    <td>${driver.experience}</td>
+                                    <td>${driver.experience} years</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         Rating
                                     </td>
                                     <td>
-                                    	<span class="glyphicon glyphicon-star"></span>
-                                    	<span class="glyphicon glyphicon-star"></span>
-                                    	<span class="glyphicon glyphicon-star"></span>
-                                    	<span class="glyphicon glyphicon-star"></span>
-                                    	<span class="glyphicon glyphicon-star-empty"></span>
+                                    	<c:set var="rating" value="${driver.rating}"/>
+                                    	<fmt:parseNumber var="stars" integerOnly="true" type="number" value="${rating}" />
+                                    	
+                                    	<c:forEach begin="1" end="${stars}" var="i">
+                                    		<span class="glyphicon glyphicon-star"></span>
+                                    	</c:forEach>
+                                    	<c:forEach begin="1" end="${5 - stars}" var="i">
+                                    		<span class="glyphicon glyphicon-star-empty"></span>
+                                    	</c:forEach>
                                     	${driver.rating}
                                     </td>
                                 </tr>
