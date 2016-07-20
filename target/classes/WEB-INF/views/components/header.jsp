@@ -37,7 +37,7 @@
 			</ul>
 
 			<c:choose>
-				<c:when test="${pageContext.request.userPrincipal.name != null}">
+				<c:when test="${pageContext.request.userPrincipal != null}">
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="${contextPath}/my-profile">
 							<span class="glyphicon glyphicon-user"></span> ${pageContext.request.userPrincipal.name}

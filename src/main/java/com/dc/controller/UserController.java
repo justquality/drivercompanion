@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,7 @@ import com.dc.model.User;
 import com.dc.repository.CompanionRepository;
 import com.dc.repository.DriverRepository;
 import com.dc.repository.RoleRepository;
+import com.dc.repository.UserRepository;
 import com.dc.service.SecurityService;
 import com.dc.service.UserService;
 import com.dc.validator.UserValidator;
@@ -25,23 +27,13 @@ import com.dc.validator.UserValidator;
 @Controller
 public class UserController {
 	
-    @Autowired
-    private UserService userService;
-    
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private DriverRepository driverRepository;
-    
-    @Autowired
-    private CompanionRepository companionRepository;
-    
-    @Autowired
-    private SecurityService securityService;
-
-    @Autowired
-    private UserValidator userValidator;
+    @Autowired private UserService 			userService;
+    @Autowired private SecurityService 		securityService;
+    @Autowired private UserValidator 		userValidator;
+    @Autowired private UserRepository 		userRepository;
+    @Autowired private RoleRepository 		roleRepository;
+    @Autowired private DriverRepository 	driverRepository;
+    @Autowired private CompanionRepository 	companionRepository;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
@@ -83,17 +75,36 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", "Your username or password is invalid.");
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
-
+        
         return "login";
     }
-
+    
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home(Model model) {
         return "home";
+    }
+    
+    @RequestMapping(value = "/my-profile", method = RequestMethod.GET)
+    public String myProfile(Model model) {
+    	String username = SecurityContextHolder.getContext().getAuthentication().getName();
+    	
+    	User user = userRepository.findByUsername(username);
+    	Driver driver = driverRepository.findByUser(user);
+    	Companion companion = companionRepository.findByUser(user);
+    	
+    	if (null != driver)
+    		model.addAttribute("driver", driver);
+    	else if (null != companion)
+    		model.addAttribute("companion", companion);
+    	else
+    		return "redirect:/admin";
+    	
+    	model.addAttribute("user", user);
+    	return "my-profile";
     }
     
 }

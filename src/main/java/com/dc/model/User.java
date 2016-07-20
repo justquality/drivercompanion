@@ -41,7 +41,7 @@ public class User {
 	private String passwordConfirm;
 	
 	@Transient
-	private String userType = "driver";
+	private String userType;
 	
 	@ManyToMany
 	@JoinTable(name = "USERS_ROLES", joinColumns = @JoinColumn(name = "ID_USER"),
@@ -130,5 +130,12 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", userType="
+				+ userType + "]";
+	}
 	
 }
