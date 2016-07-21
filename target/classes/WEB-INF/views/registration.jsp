@@ -12,13 +12,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Registration</title>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,400italic,300italic&subset=latin,cyrillic'
+	rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<div class="container">
-	
-		<%@include file="components/header.jsp" %>
-		
+
+		<%@include file="components/header.jsp"%>
+
 		<form:form method="POST" modelAttribute="userForm" class="form-signin">
 			<h2 class="form-signin-heading">Create your account</h2>
 			<spring:bind path="username">
@@ -28,7 +33,7 @@
 					<form:errors path="username"></form:errors>
 				</div>
 			</spring:bind>
-			
+
 			<spring:bind path="firstName">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
 					<form:input type="text" path="firstName" class="form-control"
@@ -36,7 +41,7 @@
 					<form:errors path="firstName"></form:errors>
 				</div>
 			</spring:bind>
-			
+
 			<spring:bind path="lastName">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
 					<form:input type="text" path="lastName" class="form-control"
@@ -44,7 +49,7 @@
 					<form:errors path="lastName"></form:errors>
 				</div>
 			</spring:bind>
-			
+
 			<spring:bind path="email">
 				<div class="form-group ${status.error ? 'has-error' : ''}">
 					<form:input type="email" path="email" class="form-control"
@@ -67,18 +72,24 @@
 					<form:errors path="passwordConfirm"></form:errors>
 				</div>
 			</spring:bind>
-			
-			<form:label path="userType">As Driver <form:radiobutton path="userType" value="driver" /></form:label>
-			<form:label path="userType">As Companion <form:radiobutton path="userType" value="companion" /></form:label>
+
+			<form:label path="userType">As Driver <form:radiobutton
+					path="userType" value="driver" />
+			</form:label>
+			<form:label path="userType">As Companion <form:radiobutton
+					path="userType" value="companion" />
+			</form:label>
 
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 		</form:form>
-		
-		<%@include file="components/footer.jsp" %>
-		
+
+		<%@include file="components/footer.jsp"%>
+
 	</div>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

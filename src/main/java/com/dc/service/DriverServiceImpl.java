@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dc.model.Driver;
+import com.dc.model.User;
 import com.dc.repository.DriverRepository;
 
 @Service
@@ -15,6 +16,11 @@ public class DriverServiceImpl implements DriverService {
 	@Override
 	public void save(Driver driver) {
 		driverRepository.save(driver);
+	}
+
+	@Override
+	public Driver findByUser(User user) {
+		return driverRepository.findByUser(user);
 	}
 
 }

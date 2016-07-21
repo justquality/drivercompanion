@@ -1,59 +1,181 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+  font-family: 'Open Sans', Arial, Helvetica, Verdana, sans-serif;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ol, ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.clear-both {
+  clear: both;
+}
+
 .form-signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
 }
-.form-signin .form-signin-heading,
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
 .form-signin .checkbox {
-    margin-bottom: 10px;
+	font-weight: normal;
 }
-.form-signin .checkbox {
-    font-weight: normal;
-}
+
 .form-signin .form-control {
-    position: relative;
-    height: auto;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 10px;
-    font-size: 16px;
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
 }
+
 .form-signin .form-control:focus {
-    z-index: 2;
+	z-index: 2;
 }
+
 .form-signin input {
-    margin-top: 10px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
+	margin-top: 10px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
 }
+
 .form-signin button {
-    margin-top: 10px;
+	margin-top: 10px;
 }
+
 .has-error {
-    color: red
+	color: red
 }
+
 .navbar-brand img {
 	max-width: 40px;
 	margin-top: -10px;
 }
+
 .jumbotron .thumbnail {
-  background: transparent;
-  border: none;
+	background: transparent;
+	border: none;
 }
-.thumbnail a>img,
-.thumbnail>img {
-  max-width: 150px;
+
+.thumbnail a>img, .thumbnail>img {
+	max-width: 150px;
 }
+
 .row-highlited {
-  border-radius: 6px;
-  color: inherit;
-  margin: 30px 0;
-  padding: 30px 15px;
-  background-color: #eee;
+	border-radius: 6px;
+	color: inherit;
+	margin: 30px 0;
+	padding: 30px 15px;
+	background-color: #eee;
 }
+
+.reviews {
+	padding: 30px 15px 0px;
+}
+
+.reviews li {
+	display: inline-block;
+}
+
+.reviews .review {
+	margin-bottom: 30px;
+}
+
+.reviews .review-photo {
+	float: none;
+	margin: 0 auto 30px;
+	display: block;
+	max-width: 200px;
+}
+
+.reviews .review-body {
+	display: block;
+}
+
+.reviews .review-body h4 {
+	text-align: center;
+}
+
+.slider.slider-horizontal#driv-exp-slider {
+	width: 100%;
+	margin-bottom: 15px;
+}
+
+.car-thumb {
+	max-width: 80%;
+	margin: 0 auto;
+	display: block;
+}
+
+.driver-passport, .companion-passport, .search-form {
+	width: 100%;
+	padding: 20px;
+	background: #eee;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	-o-border-radius: 20px;
+}
+
+.companion-passport {
+	background: transparent;
+	padding: 0;
+}
+
+.driver-passport .driver-prof-img, .companion-passport .companion-prof-img {
+	max-width: 100px;
+}
+
+.tooltip {
+	z-index: 1;
+}
+
 @media screen and (min-width: 768px) {
-  .row-highlited {
-    padding: 30px 60px;
-  }
+	.row-highlited {
+		padding: 30px 60px;
+	}
+	.reviews {
+		padding: 30px 60px 0px;
+	}
+	.reviews .review-photo {
+		float: left;
+		margin-right: 30px;
+	}
+	.reviews .review-body {
+		display: table;
+	}
+	.reviews .review-body h4 {
+		text-align: left;
+	}
 }
