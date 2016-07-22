@@ -1,5 +1,7 @@
 package com.dc.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,12 +28,16 @@ public class Companion {
 	
 	@Column(name = "RATING")
 	private Float rating = (float) 0;
+	
+	@ManyToMany(mappedBy = "companions")
+	private Set<Trip> trips;
 
 	public Companion() {}
-	
-	public Companion(User user, Float rating) {
+
+	public Companion(User user, Float rating, Set<Trip> trips) {
 		this.user = user;
 		this.rating = rating;
+		this.trips = trips;
 	}
 
 	public Long getId() {
@@ -55,6 +62,14 @@ public class Companion {
 
 	public void setRating(Float rating) {
 		this.rating = rating;
+	}
+
+	public Set<Trip> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(Set<Trip> trips) {
+		this.trips = trips;
 	}
 	
 }

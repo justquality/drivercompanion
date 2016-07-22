@@ -36,8 +36,13 @@ public class CompanionController {
 		if (bindingResult.hasErrors())
             return "redirect:/my-profile";
     	
-    	// Using repository to avoid bcrypting already crypted password
-    	userRepository.save(user);
+    	if (profile.getNewPassword().length() != 0 && profile.getNewPassword() != null) 
+    	{	// Encode new password
+    		user.setPassword(profile.getNewPassword());
+    		userService.save(user);
+    	} 
+    	else
+    		userRepository.save(user); // Save without encoding
 		
 		return "redirect:/my-profile";
 	}

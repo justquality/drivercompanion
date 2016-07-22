@@ -41,10 +41,26 @@
 						</div>
 					</spring:bind>
 					
+					<spring:bind path="newPassword">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<form:input type="password" path="newPassword" class="form-control"
+								placeholder="New Password (optional)"></form:input>
+							<form:errors path="newPassword"></form:errors>
+						</div>
+					</spring:bind>
+					
+					<spring:bind path="newPasswordConfirm">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<form:input type="password" path="newPasswordConfirm" class="form-control"
+								placeholder="Repeate New Password (optional)"></form:input>
+							<form:errors path="newPasswordConfirm"></form:errors>
+						</div>
+					</spring:bind>
+					
 					<spring:bind path="user.passwordConfirm">
 						<div class="form-group ${status.error ? 'has-error' : ''}">
 							<form:input type="password" path="user.passwordConfirm"
-								class="form-control" placeholder="Enter password to confirm changes"></form:input>
+								class="form-control" placeholder="Enter current password to confirm changes"></form:input>
 							<form:errors path="user.passwordConfirm"></form:errors>
 						</div>
 					</spring:bind>

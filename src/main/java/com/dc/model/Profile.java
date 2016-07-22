@@ -5,6 +5,8 @@ public class Profile {
 	private User user;
 	private Driver driver;
 	private Companion companion;
+	private String newPassword;
+	private String newPasswordConfirm;
 	
 	public Profile() {}
 
@@ -40,6 +42,22 @@ public class Profile {
 
 	public void setCompanion(Companion companion) {
 		this.companion = companion;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public String getNewPasswordConfirm() {
+		return newPasswordConfirm;
+	}
+
+	public void setNewPasswordConfirm(String newPasswordConfirm) {
+		this.newPasswordConfirm = newPasswordConfirm;
 	}
 	
 }

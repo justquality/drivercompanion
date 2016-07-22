@@ -42,27 +42,36 @@
 					</spring:bind>
 
 					<spring:bind path="driver.experience">
+						<form:label path="driver.experience">Experience: </form:label>
 						<form:input id="driv-exp" data-slider-id="driv-exp-slider"
 							type="text" data-slider-min="0" data-slider-max="50"
 							data-slider-step="1" data-slider-value="${driver.experience}"
 							path="driver.experience" />
 					</spring:bind>
 					
-					<spring:bind path="user.passwordConfirm">
+					<spring:bind path="newPassword">
 						<div class="form-group ${status.error ? 'has-error' : ''}">
-							<form:input type="password" path="user.passwordConfirm"
-								class="form-control" placeholder="Enter password to confirm changes"></form:input>
-							<form:errors path="user.passwordConfirm"></form:errors>
+							<form:input type="password" path="newPassword" class="form-control"
+								placeholder="New Password (optional)"></form:input>
+							<form:errors path="newPassword"></form:errors>
 						</div>
 					</spring:bind>
 					
-					<%-- <spring:bind path="password">
+					<spring:bind path="newPasswordConfirm">
 						<div class="form-group ${status.error ? 'has-error' : ''}">
-							<form:input type="password" path="password" class="form-control"
-								placeholder="New Password"></form:input>
-							<form:errors path="password"></form:errors>
+							<form:input type="password" path="newPasswordConfirm" class="form-control"
+								placeholder="Repeate New Password (optional)"></form:input>
+							<form:errors path="newPasswordConfirm"></form:errors>
 						</div>
-					</spring:bind> --%>
+					</spring:bind>
+					
+					<spring:bind path="user.passwordConfirm">
+						<div class="form-group ${status.error ? 'has-error' : ''}">
+							<form:input type="password" path="user.passwordConfirm"
+								class="form-control" placeholder="Enter current password to confirm changes"></form:input>
+							<form:errors path="user.passwordConfirm"></form:errors>
+						</div>
+					</spring:bind>
 
 					<button type="submit" class="btn btn-info">Submit changes</button>
 				</form:form>
