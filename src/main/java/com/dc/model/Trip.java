@@ -6,6 +6,9 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -16,6 +19,8 @@ import javax.persistence.Table;
 @Table(name = "TRIPS")
 public class Trip {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID_TRIP")
 	private Long id;
 	

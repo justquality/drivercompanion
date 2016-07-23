@@ -1,8 +1,5 @@
 package com.dc.controller;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dc.model.Companion;
-import com.dc.model.Driver;
-import com.dc.model.Role;
 import com.dc.model.User;
-import com.dc.repository.RoleRepository;
-import com.dc.service.CompanionService;
-import com.dc.service.DriverService;
 import com.dc.service.SecurityService;
 import com.dc.service.UserService;
 import com.dc.validator.UserValidator;
@@ -28,9 +19,6 @@ public class UserController {
     @Autowired private UserService userService;
     @Autowired private SecurityService securityService;
     @Autowired private UserValidator userValidator;
-    @Autowired private RoleRepository roleRepository;
-    @Autowired private DriverService driverService;
-    @Autowired private CompanionService companionService;
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home(Model model) {
@@ -50,26 +38,10 @@ public class UserController {
         if (bindingResult.hasErrors())
             return "registration";
 
-        Set<Role> roles = new HashSet<>();
-        Object client = null;
-        
-        roles.add(roleRepository.findOne((long) 4));		// Add ROLE_USER
         if (userForm.getUserType().equals("driver")) 
-        {
-    		roles.add(roleRepository.findOne((long) 2));	// Add ROLE_DRIVER
-    		userForm.setRoles(roles);
-    		client = new Driver();
-    		((Driver) client).setUser(userForm);
-    		driverService.save((Driver) client);
-    	} 
+    		userService.saveDriverUser(userForm);
         else if (userForm.getUserType().equals("companion")) 
-    	{
-    		roles.add(roleRepository.findOne((long) 3));	// Add ROLE_COMPANION
-    		userForm.setRoles(roles);
-    		client = new Companion();
-    		((Companion) client).setUser(userForm);
-    		companionService.save((Companion) client);
-    	}	
+    		userService.saveCompanionUser(userForm);
         
         userService.save(userForm);
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
