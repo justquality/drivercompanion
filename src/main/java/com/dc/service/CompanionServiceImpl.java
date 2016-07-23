@@ -10,8 +10,8 @@ import com.dc.repository.CompanionRepository;
 @Service
 public class CompanionServiceImpl implements CompanionService {
 
-	@Autowired
-	private CompanionRepository companionRepository;
+	@Autowired private CompanionRepository companionRepository;
+	@Autowired private UserService userService;
 	
 	@Override
 	public void save(Companion companion) {
@@ -21,6 +21,11 @@ public class CompanionServiceImpl implements CompanionService {
 	@Override
 	public Companion findByUser(User user) {
 		return companionRepository.findByUser(user);
+	}
+
+	@Override
+	public Companion findByUsername(String username) {
+		return findByUser(userService.findByUsername(username));
 	}
 
 }

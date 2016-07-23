@@ -28,16 +28,19 @@ public class ProfileValidator implements Validator {
 		if (profile.getUser().getLastName().length() < 2 || profile.getUser().getLastName().length() > 32)
 			errors.rejectValue("user.lastName", "Size.userForm.lastName");
 
-		if (profile.getNewPassword().length() != 0 && profile.getNewPassword() != null)
-		{
+		if (profile.getNewPassword().length() != 0 && profile.getNewPassword() != null) {
 			if (profile.getNewPassword().length() < 8 || profile.getNewPassword().length() > 32)
 				errors.rejectValue("newPassword", "Size.userForm.password");
 
 			if (!profile.getNewPasswordConfirm().equals(profile.getNewPassword()))
 				errors.rejectValue("newPasswordConfirm", "Diff.userForm.passwordConfirm");
 		}
+		
+		if (profile.getNewPasswordConfirm().length() != 0 && profile.getNewPasswordConfirm() != null)
+			ValidationUtils.rejectIfEmpty(errors, "newPassword", "NotEmpty");
 
+		ValidationUtils.rejectIfEmpty(errors, "user.passwordConfirm", "NotEmpty");
 		if (!BCrypt.checkpw(profile.getUser().getPasswordConfirm(), profile.getUser().getPassword()))
-			errors.rejectValue("user.passwordConfirm", "Diff.userForm.passwordConfirm");
+			errors.rejectValue("user.passwordConfirm", "Check.userForm.passwordConfirm");
 	}
 }

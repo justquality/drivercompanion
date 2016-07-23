@@ -6,4 +6,5 @@ import com.dc.model.User;
 public interface CompanionService {
 	void save(Companion companion);
 	Companion findByUser(User user);
+	Companion findByUsername(String username);
 }

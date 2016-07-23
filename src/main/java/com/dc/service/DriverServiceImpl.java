@@ -10,8 +10,8 @@ import com.dc.repository.DriverRepository;
 @Service
 public class DriverServiceImpl implements DriverService {
 
-	@Autowired
-	private DriverRepository driverRepository;
+	@Autowired private DriverRepository driverRepository;
+	@Autowired private UserService userService;
 	
 	@Override
 	public void save(Driver driver) {
@@ -21,6 +21,11 @@ public class DriverServiceImpl implements DriverService {
 	@Override
 	public Driver findByUser(User user) {
 		return driverRepository.findByUser(user);
+	}
+
+	@Override
+	public Driver findByUsername(String username) {
+		return findByUser(userService.findByUsername(username));
 	}
 
 }

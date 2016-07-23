@@ -10,8 +10,10 @@
     <http auto-config="true">
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/home" access="permitAll"/>
-        <intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/my-profile" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/my-driver/**" access="hasRole('ROLE_DRIVER')"/>
+        <intercept-url pattern="/my-companion/**" access="hasRole('ROLE_COMPANION')"/>
         <form-login login-page="/login" default-target-url="/my-profile" 
         	authentication-failure-url="/login?error" 
         	username-parameter="username" password-parameter="password"/>

@@ -3,7 +3,6 @@ package com.dc.model;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "TRIPS")
 public class Trip {
@@ -24,7 +25,7 @@ public class Trip {
 	@Column(name = "ID_TRIP")
 	private Long id;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "ID_DRIVER")
 	private Driver driver;
 	
@@ -37,6 +38,7 @@ public class Trip {
 	@Column(name = "PRICE")
 	private Double price;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "TRIP_DATE")
 	private Date date;
 	
