@@ -14,6 +14,7 @@ import com.dc.model.Profile;
 import com.dc.model.User;
 import com.dc.repository.UserRepository;
 import com.dc.service.CompanionService;
+import com.dc.service.TripService;
 import com.dc.service.UserService;
 import com.dc.validator.ProfileValidator;
 
@@ -21,8 +22,9 @@ import com.dc.validator.ProfileValidator;
 public class CompanionController {
 
 	@Autowired private UserService userService;
-	@Autowired private CompanionService companionService;
 	@Autowired private UserRepository userRepository;
+	@Autowired private CompanionService companionService;
+	@Autowired private TripService tripService;
 	@Autowired private ProfileValidator profileValidator;
 	
 	@RequestMapping(value = "/my-companion", method = RequestMethod.GET)
@@ -35,6 +37,7 @@ public class CompanionController {
 		model.addAttribute("user", user);
 		model.addAttribute("companion", companion);
 		model.addAttribute("profile", new Profile(user, companion));
+		model.addAttribute("trips", tripService.findByCompanions(companion));
 		
 		return "my-companion";
 	}

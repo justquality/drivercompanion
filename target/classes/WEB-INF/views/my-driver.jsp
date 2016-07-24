@@ -169,11 +169,11 @@
 									<table class="table table-responsive table-striped">
 										<tr>
 											<td>First Name</td>
-											<td>${user.firstName}</td>
+											<td>${driver.user.firstName}</td>
 										</tr>
 										<tr>
 											<td>Last Name</td>
-											<td>${user.lastName}</td>
+											<td>${driver.user.lastName}</td>
 										</tr>
 										<tr>
 											<td>Driving Experience</td>
@@ -210,7 +210,7 @@
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<tr>
-							<th>#</th>
+							<th>#ID</th>
 							<th>Date</th>
 							<th>From</th>
 							<th>To</th>

@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${pageContext.request.userPrincipal.name} - My Profile</title>
+<title>${pageContext.request.userPrincipal.name}-MyProfile</title>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -105,6 +105,13 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			$(document).ready(function() {
+				if (window.location.href.indexOf('#edit-profile-modal') != -1) {
+					$('#edit-profile-modal').modal('show');
+				}
+			});
+		</script>
 
 		<div class="row">
 			<div class="container-fluid">
@@ -124,11 +131,11 @@
 									<table class="table table-striped">
 										<tr>
 											<td>Name</td>
-											<td>${user.firstName}</td>
+											<td>${companion.user.firstName}</td>
 										</tr>
 										<tr>
 											<td>Surname</td>
-											<td>${user.lastName}</td>
+											<td>${companion.user.lastName}</td>
 										</tr>
 										<tr>
 											<td>Rating</td>
@@ -156,30 +163,42 @@
 		</div>
 
 		<!-- Trip list -->
-		<div class="row row-highlited">
-			<h3 class="text-center">Closed Trips</h3>
-			<br>
-			<div class="table-responsive">
-				<table class="table table-striped">
-					<tr>
-						<th>#</th>
-						<th>Date</th>
-						<th>From</th>
-						<th>To</th>
-						<th>Price</th>
-						<th>Driver</th>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>10.06.2016</td>
-						<td>Chisinau</td>
-						<td>Orhei</td>
-						<td>40</td>
-						<td>Michael Schumacher</td>
-					</tr>
-				</table>
+		<c:if test="${!empty trips}">
+			<div class="row row-highlited">
+				<h3 class="text-center">Closed Trips</h3>
+				<br>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<tr>
+							<th>#ID</th>
+							<th>Date</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Price</th>
+							<th>Driver</th>
+						</tr>
+						<c:forEach var="trip" items="${trips}">
+							<tr>
+								<td>${trip.id}</td>
+								<td><fmt:formatDate var="date" pattern="dd/MM/yyyy"
+										value="${trip.date}" /> ${date}</td>
+								<td>${trip.departure}</td>
+								<td>${trip.arrival}</td>
+								<td>${trip.price}</td>
+								<td><c:choose>
+										<c:when test="${trip.driver != null}">
+											<a href="${contextPath}/driver-${trip.driver.id}">${trip.driver.user.firstName}&nbsp;${trip.driver.user.lastName}</a>
+										</c:when>
+										<c:otherwise>
+											Currently no driver
+										</c:otherwise>
+									</c:choose></td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
 			</div>
-		</div>
+		</c:if>
 
 		<!-- Recent reviews -->
 		<div class="row">

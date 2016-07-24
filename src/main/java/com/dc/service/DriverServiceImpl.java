@@ -19,6 +19,11 @@ public class DriverServiceImpl implements DriverService {
 	}
 
 	@Override
+	public Driver findOne(Long id) {
+		return driverRepository.findOne(id);
+	}
+	
+	@Override
 	public Driver findByUser(User user) {
 		return driverRepository.findByUser(user);
 	}

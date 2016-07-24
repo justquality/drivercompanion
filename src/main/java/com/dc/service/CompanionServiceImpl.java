@@ -19,6 +19,11 @@ public class CompanionServiceImpl implements CompanionService {
 	}
 
 	@Override
+	public Companion findOne(Long id) {
+		return companionRepository.findOne(id);
+	}
+	
+	@Override
 	public Companion findByUser(User user) {
 		return companionRepository.findByUser(user);
 	}

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -69,5 +70,10 @@ public class DriverController {
     	
     	return "redirect:/my-driver";
     }
+	
+	@RequestMapping(value = "/driver-{trip.driver.id}", method = RequestMethod.GET)
+	public String driverId(@PathVariable("trip.driver.id") String id, Model model) {
+		return "driver-" + id;
+	}
 	
 }
