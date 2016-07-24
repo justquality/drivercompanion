@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${pageContext.request.userPrincipal.name} - MyProfile</title>
+<title>${pageContext.request.userPrincipal.name}&nbsp;-&nbsp;MyProfile</title>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -44,7 +44,7 @@
 					</div>
 					<div class="modal-body">
 
-						<form:form method="POST" modelAttribute="profile"
+						<form:form method="POST" modelAttribute="driver"
 							action="${contextPath}/my-driver" class="form-driver-edit">
 							<form:hidden path="user.username" />
 							<spring:bind path="user.firstName">
@@ -70,12 +70,12 @@
 								</div>
 							</spring:bind>
 
-							<spring:bind path="driver.experience">
-								<form:label path="driver.experience">Experience: </form:label>
+							<spring:bind path="experience">
+								<form:label path="experience">Experience: </form:label>
 								<form:input id="driv-exp" data-slider-id="driv-exp-slider"
 									type="text" data-slider-min="0" data-slider-max="50"
-									data-slider-step="1" data-slider-value="${driver.experience}"
-									path="driver.experience" />
+									data-slider-step="1" data-slider-value="${experience}"
+									path="experience" />
 								<script>
 									$('#driv-exp').slider({
 										formatter : function(value) {
@@ -83,23 +83,6 @@
 										}
 									});
 								</script>
-							</spring:bind>
-
-							<spring:bind path="newPassword">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="password" path="newPassword"
-										class="form-control" placeholder="New Password (optional)"></form:input>
-									<form:errors path="newPassword"></form:errors>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="newPasswordConfirm">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="password" path="newPasswordConfirm"
-										class="form-control"
-										placeholder="Repeate New Password (optional)"></form:input>
-									<form:errors path="newPasswordConfirm"></form:errors>
-								</div>
 							</spring:bind>
 
 							<spring:bind path="user.passwordConfirm">
@@ -215,6 +198,7 @@
 							<th>From</th>
 							<th>To</th>
 							<th>Price</th>
+							<th>Companions</th>
 						</tr>
 						<c:forEach var="trip" items="${trips}">
 							<tr>
@@ -224,6 +208,20 @@
 								<td>${trip.departure}</td>
 								<td>${trip.arrival}</td>
 								<td>${trip.price}&nbsp;MDL</td>
+								<td><c:choose>
+										<c:when test="${!empty trip.companions}">
+											<ul>
+												<c:forEach var="companion" items="${trip.companions}">
+													<li><a href="${contextPath}/companion-${companion.id}">
+														${companion.user.firstName}&nbsp;${companion.user.lastName}
+													</a></li>
+												</c:forEach>
+											</ul>
+										</c:when>
+										<c:otherwise>
+											Currently no companions
+										</c:otherwise>
+									</c:choose></td>
 							</tr>
 						</c:forEach>
 					</table>

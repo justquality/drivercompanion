@@ -1,9 +1,12 @@
 package com.dc.service;
 
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dc.model.Companion;
+import com.dc.model.Trip;
 import com.dc.model.User;
 import com.dc.repository.CompanionRepository;
 
@@ -31,6 +34,11 @@ public class CompanionServiceImpl implements CompanionService {
 	@Override
 	public Companion findByUsername(String username) {
 		return findByUser(userService.findByUsername(username));
+	}
+
+	@Override
+	public Set<Companion> findByTrips(Trip trip) {
+		return companionRepository.findByTrips(trip);
 	}
 
 }

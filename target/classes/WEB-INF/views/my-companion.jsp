@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${pageContext.request.userPrincipal.name}-MyProfile</title>
+<title>${pageContext.request.userPrincipal.name}&nbsp;-&nbsp;MyProfile</title>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -44,7 +44,7 @@
 					</div>
 					<div class="modal-body">
 
-						<form:form method="POST" modelAttribute="profile"
+						<form:form method="POST" modelAttribute="companion"
 							action="${contextPath}/my-companion" class="form-companion-edit">
 							<form:hidden path="user.username" />
 							<spring:bind path="user.firstName">
@@ -67,23 +67,6 @@
 								<div class="form-group ${status.error ? 'has-error' : ''}">
 									<form:input type="email" path="user.email" class="form-control"
 										placeholder="Email"></form:input>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="newPassword">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="password" path="newPassword"
-										class="form-control" placeholder="New Password (optional)"></form:input>
-									<form:errors path="newPassword"></form:errors>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="newPasswordConfirm">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="password" path="newPasswordConfirm"
-										class="form-control"
-										placeholder="Repeate New Password (optional)"></form:input>
-									<form:errors path="newPasswordConfirm"></form:errors>
 								</div>
 							</spring:bind>
 
