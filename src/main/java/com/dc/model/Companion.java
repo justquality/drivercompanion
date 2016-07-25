@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -33,12 +32,6 @@ public class Companion {
 	
 	@ManyToMany(mappedBy = "companions", fetch = FetchType.EAGER)
 	private Set<Trip> trips;
-	
-	@OneToMany(mappedBy = "companionAuthor")
-	private Set<Review> authorReviews;
-	
-	@OneToMany(mappedBy = "companionTarget")
-	private Set<Review> targetReviews;
 
 	public Companion() {}
 
@@ -78,22 +71,6 @@ public class Companion {
 
 	public void setTrips(Set<Trip> trips) {
 		this.trips = trips;
-	}
-
-	public Set<Review> getAuthorReviews() {
-		return authorReviews;
-	}
-
-	public void setAuthorReviews(Set<Review> authorReviews) {
-		this.authorReviews = authorReviews;
-	}
-
-	public Set<Review> getTargetReviews() {
-		return targetReviews;
-	}
-
-	public void setTargetReviews(Set<Review> targetReviews) {
-		this.targetReviews = targetReviews;
 	}
 	
 }

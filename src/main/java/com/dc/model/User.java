@@ -4,12 +4,14 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -50,6 +52,12 @@ public class User {
 	@JoinTable(name = "USERS_ROLES", joinColumns = @JoinColumn(name = "ID_USER"),
 			inverseJoinColumns = @JoinColumn(name = "ID_ROLE"))
 	private Set<Role> roles;
+	
+	@OneToMany(mappedBy = "userAuthor", fetch = FetchType.EAGER)
+	private Set<Review> authorReviews;
+	
+	@OneToMany(mappedBy = "userTarget", fetch = FetchType.EAGER)
+	private Set<Review> targetReviews;
 	
 	public User() {}
 	
@@ -142,11 +150,20 @@ public class User {
         this.roles = roles;
     }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", password=" + password + ", passwordConfirm=" + passwordConfirm + ", userType="
-				+ userType + "]";
+	public Set<Review> getAuthorReviews() {
+		return authorReviews;
+	}
+
+	public void setAuthorReviews(Set<Review> authorReviews) {
+		this.authorReviews = authorReviews;
+	}
+
+	public Set<Review> getTargetReviews() {
+		return targetReviews;
+	}
+
+	public void setTargetReviews(Set<Review> targetReviews) {
+		this.targetReviews = targetReviews;
 	}
 	
 }

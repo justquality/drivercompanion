@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -52,18 +51,6 @@ public class CompanionController {
     	companionService.save(updateCompanion);
 		
 		return "redirect:/my-companion";
-	}
-	
-	@RequestMapping(value = "/companion-{username}", method = RequestMethod.GET)
-	public String companionId(@PathVariable("username") String username, Model model) {
-		if (SecurityContextHolder.getContext().getAuthentication().getName().equals(username))
-			return "redirect:/my-companion";
-		
-		Companion companion = companionService.findByUsername(username);
-		model.addAttribute("companion", companion);
-		model.addAttribute("trips", tripService.findByCompanions(companion));
-		
-		return "companion-page";
 	}
 	
 }

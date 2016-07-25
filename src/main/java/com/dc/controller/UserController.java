@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,6 +16,7 @@ import com.dc.model.User;
 import com.dc.service.CompanionService;
 import com.dc.service.DriverService;
 import com.dc.service.SecurityService;
+import com.dc.service.TripService;
 import com.dc.service.UserService;
 import com.dc.validator.UserValidator;
 
@@ -25,6 +27,7 @@ public class UserController {
     @Autowired private SecurityService securityService;
     @Autowired private DriverService driverService;
 	@Autowired private CompanionService companionService;
+	@Autowired private TripService tripService;
     @Autowired private UserValidator userValidator;
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
@@ -80,5 +83,29 @@ public class UserController {
 			return "redirect:/my-companion";
     	return "redirect:/admin";
     }
+    
+    @RequestMapping(value = "/user-{username}", method = RequestMethod.GET)
+	public String driverId(@PathVariable("username") String username, Model model) {
+		if (SecurityContextHolder.getContext().getAuthentication().getName().equals(username))
+			return "redirect:/my-profile";
+		
+		Driver driver = driverService.findByUsername(username);
+    	Companion companion = companionService.findByUsername(username);
+		
+    	if (null != driver)
+    	{
+    		model.addAttribute("driver", driver);
+    		model.addAttribute("trips", tripService.findByDriver(driver));
+    		return "driver-page";
+    	}
+    	else if (null != companion)
+    	{
+    		model.addAttribute("companion", companion);
+    		model.addAttribute("trips", tripService.findByCompanions(companion));
+    		return "companion-page";
+    	}
+		
+    	return "redirect:/home";
+	}
     
 }

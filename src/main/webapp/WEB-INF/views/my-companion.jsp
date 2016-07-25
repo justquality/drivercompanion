@@ -182,7 +182,7 @@
 								<td>${trip.price}</td>
 								<td><c:choose>
 										<c:when test="${trip.driver != null}">
-											<a href="${contextPath}/driver-${trip.driver.user.username}">
+											<a href="${contextPath}/user-${trip.driver.user.username}">
 												${trip.driver.user.firstName}&nbsp;${trip.driver.user.lastName}
 											</a>&nbsp;(${trip.driver.user.phone})
 										</c:when>
@@ -197,36 +197,41 @@
 			</div>
 		</c:if>
 
-		<!-- Recent reviews -->
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center">My reviews</h3>
-				<ul class="reviews">
-					<%
-						for (int i = 0; i < 3; ++i) {
-					%>
-					<%@include file="components/review.jsp"%>
-					<%
-						}
-					%>
-				</ul>
+				<c:choose>
+					<c:when test="${!empty companion.user.authorReviews}">
+						<ul class="reviews">
+							<c:forEach var="review" items="${companion.user.authorReviews}">
+								<%@include file="components/review.jsp"%>
+							</c:forEach>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<p class="text-center">You did not write any reviews yet.</p>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
 		<hr>
-		<!-- My reviews -->
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center">Recent reviews</h3>
-				<ul class="reviews">
-					<%
-						for (int i = 0; i < 3; ++i) {
-					%>
-					<%@include file="components/review.jsp"%>
-					<%
-						}
-					%>
-				</ul>
+				<c:choose>
+					<c:when test="${!empty companion.user.targetReviews}">
+						<ul class="reviews">
+							<c:forEach var="review" items="${companion.user.targetReviews}">
+								<%@include file="components/review.jsp"%>
+							</c:forEach>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<p class="text-center">There are no reviews about You.</p>
+						<br>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 

@@ -2,6 +2,7 @@ package com.dc.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,21 +19,13 @@ public class Review {
 	@Column(name = "ID_REVIEW")
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_AUTHOR")
-	private Driver driverAuthor;
+	private User userAuthor;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_TARGET")
-	private Driver driverTarget;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_AUTHOR")
-	private Companion companionAuthor;
-	
-	@ManyToOne
-	@JoinColumn(name = "ID_TARGET")
-	private Companion companionTarget;
+	private User userTarget;
 	
 	@Column(name = "AUTHOR_NAME")
 	private String authorName;
@@ -45,12 +38,9 @@ public class Review {
 	
 	public Review() {}
 
-	public Review(Driver driverAuthor, Driver driverTarget, Companion companionAuthor, Companion companionTarget,
-			String authorName, Byte mark, String comment) {
-		this.driverAuthor = driverAuthor;
-		this.driverTarget = driverTarget;
-		this.companionAuthor = companionAuthor;
-		this.companionTarget = companionTarget;
+	public Review(User userAuthor, User userTarget, String authorName, Byte mark, String comment) {
+		this.userAuthor = userAuthor;
+		this.userTarget = userTarget;
 		this.authorName = authorName;
 		this.mark = mark;
 		this.comment = comment;
@@ -64,36 +54,20 @@ public class Review {
 		this.id = id;
 	}
 
-	public Driver getDriverAuthor() {
-		return driverAuthor;
+	public User getUserAuthor() {
+		return userAuthor;
 	}
 
-	public void setDriverAuthor(Driver driverAuthor) {
-		this.driverAuthor = driverAuthor;
+	public void setUserAuthor(User userAuthor) {
+		this.userAuthor = userAuthor;
 	}
 
-	public Driver getDriverTarget() {
-		return driverTarget;
+	public User getUserTarget() {
+		return userTarget;
 	}
 
-	public void setDriverTarget(Driver driverTarget) {
-		this.driverTarget = driverTarget;
-	}
-
-	public Companion getCompanionAuthor() {
-		return companionAuthor;
-	}
-
-	public void setCompanionAuthor(Companion companionAuthor) {
-		this.companionAuthor = companionAuthor;
-	}
-
-	public Companion getCompanionTarget() {
-		return companionTarget;
-	}
-
-	public void setCompanionTarget(Companion companionTarget) {
-		this.companionTarget = companionTarget;
+	public void setUserTarget(User userTarget) {
+		this.userTarget = userTarget;
 	}
 
 	public String getAuthorName() {

@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,12 +37,6 @@ public class Driver {
 	@JoinTable(name = "DRIVERS_CARS", joinColumns = @JoinColumn(name = "ID_DRIVER"),
 			inverseJoinColumns = @JoinColumn(name = "ID_CAR"))
 	private Set<Car> cars;
-	
-	@OneToMany(mappedBy = "driverAuthor")
-	private Set<Review> authorReviews;
-	
-	@OneToMany(mappedBy = "driverTarget")
-	private Set<Review> targetReviews;
 
 	public Driver() {}
 
@@ -92,22 +85,6 @@ public class Driver {
 
 	public void setCars(Set<Car> cars) {
 		this.cars = cars;
-	}
-
-	public Set<Review> getAuthorReviews() {
-		return authorReviews;
-	}
-
-	public void setAuthorReviews(Set<Review> authorReviews) {
-		this.authorReviews = authorReviews;
-	}
-
-	public Set<Review> getTargetReviews() {
-		return targetReviews;
-	}
-
-	public void setTargetReviews(Set<Review> targetReviews) {
-		this.targetReviews = targetReviews;
 	}
 	
 }

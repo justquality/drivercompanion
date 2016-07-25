@@ -132,7 +132,7 @@
 										<c:choose>
 											<c:when test="${!empty trip.companions}">
 												<c:forEach var="companion" items="${trip.companions}">
-													<li><a href="${contextPath}/companion-${companion.user.username}">
+													<li><a href="${contextPath}/user-${companion.user.username}">
 															${companion.user.firstName}&nbsp;${companion.user.lastName}
 													</a>&nbsp;(${companion.user.phone})</li>
 												</c:forEach>
@@ -149,36 +149,41 @@
 			</div>
 		</c:if>
 
-		<!-- Recent reviews -->
 		<div class="row">
 			<div class="col-md-12">
-				<h3 class="text-center">My reviews</h3>
-				<ul class="reviews">
-					<%
-						for (int i = 0; i < 3; ++i) {
-					%>
-					<%@include file="components/review.jsp"%>
-					<%
-						}
-					%>
-				</ul>
+				<h3 class="text-center">${driver.user.firstName}'s reviews</h3>
+				<c:choose>
+					<c:when test="${!empty driver.user.authorReviews}">
+						<ul class="reviews">
+							<c:forEach var="review" items="${driver.user.authorReviews}">
+								<%@include file="components/review.jsp"%>
+							</c:forEach>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<p class="text-center">${driver.user.firstName} did not write any reviews yet.</p>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
 		<hr>
-		<!-- My reviews -->
 		<div class="row">
 			<div class="col-md-12">
 				<h3 class="text-center">Recent reviews</h3>
-				<ul class="reviews">
-					<%
-						for (int i = 0; i < 3; ++i) {
-					%>
-					<%@include file="components/review.jsp"%>
-					<%
-						}
-					%>
-				</ul>
+				<c:choose>
+					<c:when test="${!empty driver.user.targetReviews}">
+						<ul class="reviews">
+							<c:forEach var="review" items="${driver.user.targetReviews}">
+								<%@include file="components/review.jsp"%>
+							</c:forEach>
+						</ul>
+					</c:when>
+					<c:otherwise>
+						<p class="text-center">There are no reviews about ${driver.user.firstName}.</p>
+						<br>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 
