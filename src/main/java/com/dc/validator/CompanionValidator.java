@@ -1,5 +1,8 @@
 package com.dc.validator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -27,6 +30,12 @@ public class CompanionValidator implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "user.lastName", "NotEmpty");
 		if (companion.getUser().getLastName().length() < 2 || companion.getUser().getLastName().length() > 32)
 			errors.rejectValue("user.lastName", "Size.userForm.lastName");
+		
+		ValidationUtils.rejectIfEmpty(errors, "user.phone", "NotEmpty");
+        Pattern pattern = Pattern.compile("\\b[0][67][0-9]{1}[-][0-9]{3}[-][0-9]{3}\\b");
+        Matcher matcher = pattern.matcher(companion.getUser().getPhone());
+        if (!matcher.matches())
+        	errors.rejectValue("user.phone", "Format.userForm.phone");
 		
 		ValidationUtils.rejectIfEmpty(errors, "user.passwordConfirm", "NotEmpty");
 		if (!BCrypt.checkpw(companion.getUser().getPasswordConfirm(), companion.getUser().getPassword()))

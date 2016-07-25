@@ -1,5 +1,8 @@
 package com.dc.validator;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -39,6 +42,12 @@ public class UserValidator implements Validator {
         if (user.getLastName().length() < 2 || user.getLastName().length() > 32)
         	errors.rejectValue("lastName", "Size.userForm.lastName");
 
+        ValidationUtils.rejectIfEmpty(errors, "phone", "NotEmpty");
+        Pattern pattern = Pattern.compile("\\b[0][67][0-9]{1}[-][0-9]{3}[-][0-9]{3}\\b");
+        Matcher matcher = pattern.matcher(user.getPhone());
+        if (!matcher.matches())
+        	errors.rejectValue("phone", "Format.userForm.phone");
+        
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32)
             errors.rejectValue("password", "Size.userForm.password");

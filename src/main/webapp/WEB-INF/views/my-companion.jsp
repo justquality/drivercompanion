@@ -63,6 +63,14 @@
 								</div>
 							</spring:bind>
 
+							<spring:bind path="user.phone">
+								<div class="form-group ${status.error ? 'has-error' : ''}">
+									<form:input type="text" path="user.phone" class="form-control"
+										placeholder="Phone (0XX-XXX-XXX)"></form:input>
+									<form:errors path="user.phone"></form:errors>
+								</div>
+							</spring:bind>
+
 							<spring:bind path="user.email">
 								<div class="form-group ${status.error ? 'has-error' : ''}">
 									<form:input type="email" path="user.email" class="form-control"
@@ -113,12 +121,16 @@
 								<div class="table-responsive">
 									<table class="table table-striped">
 										<tr>
-											<td>Name</td>
+											<td>First Name</td>
 											<td>${companion.user.firstName}</td>
 										</tr>
 										<tr>
-											<td>Surname</td>
+											<td>Last name</td>
 											<td>${companion.user.lastName}</td>
+										</tr>
+										<tr>
+											<td>Phone Number</td>
+											<td>${companion.user.phone}</td>
 										</tr>
 										<tr>
 											<td>Rating</td>
@@ -170,7 +182,9 @@
 								<td>${trip.price}</td>
 								<td><c:choose>
 										<c:when test="${trip.driver != null}">
-											<a href="${contextPath}/driver-${trip.driver.id}">${trip.driver.user.firstName}&nbsp;${trip.driver.user.lastName}</a>
+											<a href="${contextPath}/driver-${trip.driver.user.username}">
+												${trip.driver.user.firstName}&nbsp;${trip.driver.user.lastName}
+											</a>&nbsp;(${trip.driver.user.phone})
 										</c:when>
 										<c:otherwise>
 											Currently no driver

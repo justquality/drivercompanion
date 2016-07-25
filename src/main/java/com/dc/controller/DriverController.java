@@ -23,16 +23,11 @@ public class DriverController {
 	@Autowired private TripService tripService;
 	@Autowired private DriverValidator driverValidator;
 	
-	@RequestMapping(value = "/driver-{id}", method = RequestMethod.GET)
-	public String driverId(@PathVariable("id") String id, Model model) {
-		return "driver-" + id;
-	}
-	
 	@RequestMapping(value = "/my-driver", method = RequestMethod.GET)
 	public String myDriver(Model model) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		Driver driver = driverService.findByUsername(username);
 		
+		Driver driver = driverService.findByUsername(username);
 		model.addAttribute("driver", driver);
 		model.addAttribute("trips", tripService.findByDriver(driver));
 		
@@ -59,5 +54,17 @@ public class DriverController {
     	
     	return "redirect:/my-driver";
     }
+	
+	@RequestMapping(value = "/driver-{username}", method = RequestMethod.GET)
+	public String driverId(@PathVariable("username") String username, Model model) {
+		if (SecurityContextHolder.getContext().getAuthentication().getName().equals(username))
+			return "redirect:/my-driver";
+		
+		Driver driver = driverService.findByUsername(username);
+		model.addAttribute("driver", driver);
+		model.addAttribute("trips", tripService.findByDriver(driver));
+		
+		return "driver-page";
+	}
 	
 }

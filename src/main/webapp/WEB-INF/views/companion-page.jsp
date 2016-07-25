@@ -35,75 +35,6 @@
 
 		<%@include file="components/header.jsp"%>
 
-		<div class="modal fade" id="edit-profile-modal" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Edit Profile</h4>
-					</div>
-					<div class="modal-body">
-
-						<form:form method="POST" modelAttribute="companion"
-							action="${contextPath}/my-companion" class="form-companion-edit">
-							<form:hidden path="user.username" />
-							<spring:bind path="user.firstName">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="text" path="user.firstName"
-										class="form-control" placeholder="First Name"></form:input>
-									<form:errors path="user.firstName"></form:errors>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="user.lastName">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="text" path="user.lastName"
-										class="form-control" placeholder="Last Name"></form:input>
-									<form:errors path="user.lastName"></form:errors>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="user.phone">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="text" path="user.phone" class="form-control"
-										placeholder="Phone (0XX-XXX-XXX)"></form:input>
-									<form:errors path="user.phone"></form:errors>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="user.email">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="email" path="user.email" class="form-control"
-										placeholder="Email"></form:input>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="user.passwordConfirm">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="password" path="user.passwordConfirm"
-										class="form-control"
-										placeholder="Enter current password to confirm changes"></form:input>
-									<form:errors path="user.passwordConfirm"></form:errors>
-								</div>
-							</spring:bind>
-
-							<form:hidden path="user.password" />
-
-							<button type="submit" class="btn btn-info">Submit
-								changes</button>
-						</form:form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script>
-			$(document).ready(function() {
-				if (window.location.href.indexOf('#edit-profile-modal') != -1) {
-					$('#edit-profile-modal').modal('show');
-				}
-			});
-		</script>
-
 		<div class="row">
 			<div class="container-fluid">
 				<div class="col-md-6">
@@ -112,9 +43,6 @@
 							<span class="media-left"> <img
 								class="media-object companion-prof-img img-thumbnail"
 								src="img/driver-thumb.jpg" alt="Profile image"><br>
-								<button type="button" data-toggle="modal"
-									data-target="#edit-profile-modal"
-									class="btn btn-sm btn-block btn-info" name="edit-profile">Edit</button>
 							</span>
 							<div class="media-body">
 								<h4 class="media-heading">Personal Data</h4>
@@ -148,12 +76,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
-					<a href="${contextPath}/my-companion/new-trip"
-						class="btn btn-lg btn-block btn-success">New Trip</a><br> <a
-						href="${contextPath}/my-companion/search"
-						class="btn btn-lg btn-block btn-info">Search for Drivers</a><br>
-				</div>
+				<div class="col-md-6"></div>
 			</div>
 		</div>
 

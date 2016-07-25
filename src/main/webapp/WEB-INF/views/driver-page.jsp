@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${pageContext.request.userPrincipal.name}&nbsp;-&nbsp;MyProfile</title>
+<title>${driver.user.firstName}&nbsp;-&nbsp;Driver</title>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -35,97 +35,12 @@
 
 		<%@include file="components/header.jsp"%>
 
-		<div class="modal fade" id="edit-profile-modal" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Edit Profile</h4>
-					</div>
-					<div class="modal-body">
-
-						<form:form method="POST" modelAttribute="driver"
-							action="${contextPath}/my-driver" class="form-driver-edit">
-							<form:hidden path="user.username" />
-							<spring:bind path="user.firstName">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="text" path="user.firstName"
-										class="form-control" placeholder="First Name"></form:input>
-									<form:errors path="user.firstName"></form:errors>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="user.lastName">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="text" path="user.lastName"
-										class="form-control" placeholder="Last Name"></form:input>
-									<form:errors path="user.lastName"></form:errors>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="user.phone">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="text" path="user.phone" class="form-control"
-										placeholder="Phone (0XX-XXX-XXX)"></form:input>
-									<form:errors path="user.phone"></form:errors>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="user.email">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="email" path="user.email" class="form-control"
-										placeholder="Email"></form:input>
-								</div>
-							</spring:bind>
-
-							<spring:bind path="experience">
-								<form:label path="experience">Experience: </form:label>
-								<form:input id="driv-exp" data-slider-id="driv-exp-slider"
-									type="text" data-slider-min="0" data-slider-max="50"
-									data-slider-step="1" data-slider-value="${experience}"
-									path="experience" />
-								<script>
-									$('#driv-exp').slider({
-										formatter : function(value) {
-											return value + ' years';
-										}
-									});
-								</script>
-							</spring:bind>
-
-							<spring:bind path="user.passwordConfirm">
-								<div class="form-group ${status.error ? 'has-error' : ''}">
-									<form:input type="password" path="user.passwordConfirm"
-										class="form-control"
-										placeholder="Enter current password to confirm changes"></form:input>
-									<form:errors path="user.passwordConfirm"></form:errors>
-								</div>
-							</spring:bind>
-
-							<form:hidden path="user.password" />
-
-							<button type="submit" class="btn btn-info">Submit
-								changes</button>
-						</form:form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script>
-			$(document).ready(function() {
-				if (window.location.href.indexOf('#edit-profile-modal') != -1) {
-					$('#edit-profile-modal').modal('show');
-				}
-			});
-		</script>
-
 		<div class="row">
 			<div class="container-fluid">
 				<div class="col-md-7">
 					<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
 					<h4>
 						Cars:
-						<button type="button" class="btn btn-link" name="button">Edit</button>
 					</h4>
 					<div class="table-responsive">
 						<table class="table table-striped">
@@ -150,9 +65,6 @@
 							<span class="media-left"> <img
 								class="media-object driver-prof-img img-thumbnail"
 								src="img/driver-thumb.jpg" alt="Profile image"><br>
-								<button type="button" data-toggle="modal"
-									data-target="#edit-profile-modal"
-									class="btn btn-sm btn-block btn-info" name="edit-profile">Edit</button>
 							</span>
 							<div class="media-body">
 								<h4 class="media-heading">Personal Data</h4>
@@ -189,10 +101,6 @@
 							</div>
 						</div>
 					</div>
-					<br> <a href="${contextPath}/my-driver/new-trip"
-						class="btn btn-lg btn-block btn-success">New Trip</a><br> <a
-						href="${contextPath}/my-driver/search"
-						class="btn btn-lg btn-block btn-info">Search for Companions</a><br>
 				</div>
 			</div>
 		</div>
@@ -224,17 +132,16 @@
 										<c:choose>
 											<c:when test="${!empty trip.companions}">
 												<c:forEach var="companion" items="${trip.companions}">
-													<li><a
-														href="${contextPath}/companion-${companion.user.username}">
+													<li><a href="${contextPath}/companion-${companion.user.username}">
 															${companion.user.firstName}&nbsp;${companion.user.lastName}
 													</a>&nbsp;(${companion.user.phone})</li>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
-												<li>Currently no companions</li>
-											</c:otherwise>
+											<li>Currently no companions</li>
+										</c:otherwise>
 										</c:choose>
-									</ul></td>
+								</ul></td>
 							</tr>
 						</c:forEach>
 					</table>

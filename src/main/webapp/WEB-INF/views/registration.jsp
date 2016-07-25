@@ -53,6 +53,14 @@
 					<form:errors path="lastName"></form:errors>
 				</div>
 			</spring:bind>
+			
+			<spring:bind path="phone">
+				<div class="form-group ${status.error ? 'has-error' : ''}">
+					<form:input type="text" path="phone" class="form-control"
+						placeholder="Phone Number"></form:input>
+					<form:errors path="phone"></form:errors>
+				</div>
+			</spring:bind>
 
 			<spring:bind path="email">
 				<div class="form-group ${status.error ? 'has-error' : ''}">

@@ -63,6 +63,14 @@
 								</div>
 							</spring:bind>
 
+							<spring:bind path="user.phone">
+								<div class="form-group ${status.error ? 'has-error' : ''}">
+									<form:input type="text" path="user.phone" class="form-control"
+										placeholder="Phone (0XX-XXX-XXX)"></form:input>
+									<form:errors path="user.phone"></form:errors>
+								</div>
+							</spring:bind>
+
 							<spring:bind path="user.email">
 								<div class="form-group ${status.error ? 'has-error' : ''}">
 									<form:input type="email" path="user.email" class="form-control"
@@ -159,6 +167,10 @@
 											<td>${driver.user.lastName}</td>
 										</tr>
 										<tr>
+											<td>Phone Number</td>
+											<td>${driver.user.phone}</td>
+										</tr>
+										<tr>
 											<td>Driving Experience</td>
 											<td>${driver.experience}&nbsp;years</td>
 										</tr>
@@ -208,20 +220,21 @@
 								<td>${trip.departure}</td>
 								<td>${trip.arrival}</td>
 								<td>${trip.price}&nbsp;MDL</td>
-								<td><c:choose>
-										<c:when test="${!empty trip.companions}">
-											<ul>
+								<td><ul>
+										<c:choose>
+											<c:when test="${!empty trip.companions}">
 												<c:forEach var="companion" items="${trip.companions}">
-													<li><a href="${contextPath}/companion-${companion.id}">
-														${companion.user.firstName}&nbsp;${companion.user.lastName}
-													</a></li>
+													<li><a
+														href="${contextPath}/companion-${companion.user.username}">
+															${companion.user.firstName}&nbsp;${companion.user.lastName}
+													</a>&nbsp;(${companion.user.phone})</li>
 												</c:forEach>
-											</ul>
-										</c:when>
-										<c:otherwise>
-											Currently no companions
-										</c:otherwise>
-									</c:choose></td>
+											</c:when>
+											<c:otherwise>
+												<li>Currently no companions</li>
+											</c:otherwise>
+										</c:choose>
+									</ul></td>
 							</tr>
 						</c:forEach>
 					</table>

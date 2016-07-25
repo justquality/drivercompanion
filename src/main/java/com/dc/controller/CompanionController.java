@@ -23,16 +23,11 @@ public class CompanionController {
 	@Autowired private TripService tripService;
 	@Autowired private CompanionValidator companionValidator;
 	
-	@RequestMapping(value = "/companion-{id}", method = RequestMethod.GET)
-	public String companionId(@PathVariable("id") String id, Model model) {
-		return "companion-" + id;
-	}
-	
 	@RequestMapping(value = "/my-companion", method = RequestMethod.GET)
 	public String myCompanion(Model model) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		Companion companion = companionService.findByUsername(username);
 		
+		Companion companion = companionService.findByUsername(username);
 		model.addAttribute("companion", companion);
 		model.addAttribute("trips", tripService.findByCompanions(companion));
 		
@@ -57,6 +52,18 @@ public class CompanionController {
     	companionService.save(updateCompanion);
 		
 		return "redirect:/my-companion";
+	}
+	
+	@RequestMapping(value = "/companion-{username}", method = RequestMethod.GET)
+	public String companionId(@PathVariable("username") String username, Model model) {
+		if (SecurityContextHolder.getContext().getAuthentication().getName().equals(username))
+			return "redirect:/my-companion";
+		
+		Companion companion = companionService.findByUsername(username);
+		model.addAttribute("companion", companion);
+		model.addAttribute("trips", tripService.findByCompanions(companion));
+		
+		return "companion-page";
 	}
 	
 }

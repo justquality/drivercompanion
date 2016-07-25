@@ -31,6 +31,9 @@ public class User {
 	@Column(name = "LAST_NAME")
 	private String lastName;
 	
+	@Column(name = "PHONE")
+	private String phone;
+	
 	@Column(name = "EMAIL")
 	private String email;
 	
@@ -50,12 +53,13 @@ public class User {
 	
 	public User() {}
 	
-	public User(String username, String firstName, String lastName, String email, String password) {
+	public User(String username, String firstName, String lastName, String email, String password, Set<Role> roles) {
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
+		this.roles = roles;
 	}
 	
 	public Long getId() {
@@ -90,6 +94,14 @@ public class User {
 		this.lastName = lastName;
 	}
 	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getEmail() {
 		return email;
 	}
