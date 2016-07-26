@@ -8,7 +8,11 @@ import com.dc.model.Trip;
 
 public interface TripService {
 	void save(Trip trip);
+	Trip findOne(Long id);
+	Trip findByIdAndDriver(Long id, Driver driver);
+	Trip findByIdAndCompanions(Long id, Companion companion);
 	Set<Trip> findByDriver(Driver driver);
 	Set<Trip> findByCompanions(Companion companion);
 	Set<Trip> findByDriverAndCompanions(Driver driver, Companion companion);
+	void delete(Long id);
 }

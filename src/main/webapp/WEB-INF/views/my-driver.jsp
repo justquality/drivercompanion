@@ -236,7 +236,9 @@
 										</c:choose>
 									</ul></td>
 								<td><a href="${contextPath}/my-driver/edit-trip-${trip.id}">Edit</a></td>
-								<td><a href="${contextPath}/my-driver/delete-trip-${trip.id}">Delete</a></td>
+								<td><c:if test="${empty trip.companions}">
+										<a href="${contextPath}/my-driver/delete-trip-${trip.id}">Delete</a>
+									</c:if></td>
 							</tr>
 						</c:forEach>
 					</table>

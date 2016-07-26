@@ -20,6 +20,21 @@ public class TripServiceImpl implements TripService {
 	public void save(Trip trip) {
 		tripRepository.save(trip);
 	}
+	
+	@Override
+	public Trip findOne(Long id) {
+		return tripRepository.findOne(id);
+	}
+	
+	@Override
+	public Trip findByIdAndDriver(Long id, Driver driver) {
+		return tripRepository.findByIdAndDriver(id, driver);
+	}
+	
+	@Override
+	public Trip findByIdAndCompanions(Long id, Companion companion) {
+		return tripRepository.findByIdAndCompanions(id, companion);
+	}
 
 	@Override
 	public Set<Trip> findByDriver(Driver driver) {
@@ -34,6 +49,11 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public Set<Trip> findByDriverAndCompanions(Driver driver, Companion companion) {
 		return tripRepository.findByDriverAndCompanions(driver, companion);
+	}
+
+	@Override
+	public void delete(Long id) {
+		tripRepository.delete(id);
 	}
 
 }

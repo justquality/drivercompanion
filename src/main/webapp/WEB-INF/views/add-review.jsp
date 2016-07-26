@@ -34,7 +34,9 @@
 
 		<%@include file="components/header.jsp"%>
 
-		<h4 class="text-center">${error}</h4>
+		<h4 class="text-center">
+			<font color="red">${error}</font>
+		</h4>
 
 		<c:if test="${error == null}">
 			<form:form method="POST" modelAttribute="review"
