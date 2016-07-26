@@ -27,13 +27,8 @@ public class TripServiceImpl implements TripService {
 	}
 	
 	@Override
-	public Trip findByIdAndDriver(Long id, Driver driver) {
-		return tripRepository.findByIdAndDriver(id, driver);
-	}
-	
-	@Override
-	public Trip findByIdAndCompanions(Long id, Companion companion) {
-		return tripRepository.findByIdAndCompanions(id, companion);
+	public Trip findByDriverAndCompanions(Driver driver, Companion companion) {
+		return tripRepository.findByDriverAndCompanions(driver, companion);
 	}
 
 	@Override
@@ -47,10 +42,15 @@ public class TripServiceImpl implements TripService {
 	}
 
 	@Override
-	public Set<Trip> findByDriverAndCompanions(Driver driver, Companion companion) {
-		return tripRepository.findByDriverAndCompanions(driver, companion);
+	public Set<Trip> findByDriverAndClosed(Driver driver, Boolean bool) {
+		return tripRepository.findByDriverAndClosed(driver, bool);
 	}
 
+	@Override
+	public Set<Trip> findByCompanionsAndClosed(Companion companion, Boolean bool) {
+		return tripRepository.findByCompanionsAndClosed(companion, bool);
+	}
+	
 	@Override
 	public void delete(Long id) {
 		tripRepository.delete(id);

@@ -43,6 +43,9 @@ public class Trip {
 	@Column(name = "TRIP_DATE")
 	private Date date;
 	
+	@Column(name = "CLOSED")
+	private Boolean closed;
+	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "TRIPS_COMPANIONS", joinColumns = @JoinColumn(name = "ID_TRIP"),
 			inverseJoinColumns = @JoinColumn(name = "ID_COMPANION"))
@@ -50,12 +53,13 @@ public class Trip {
 	
 	public Trip() {}
 
-	public Trip(Driver driver, String departure, String arrival, Double price, Date date, Set<Companion> companions) {
+	public Trip(Driver driver, String departure, String arrival, Double price, Date date, Boolean closed, Set<Companion> companions) {
 		this.driver = driver;
 		this.departure = departure;
 		this.arrival = arrival;
 		this.price = price;
 		this.date = date;
+		this.closed = closed;
 		this.companions = companions;
 	}
 
@@ -105,6 +109,14 @@ public class Trip {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public Boolean getClosed() {
+		return closed;
+	}
+
+	public void setClosed(Boolean closed) {
+		this.closed = closed;
 	}
 
 	public Set<Companion> getCompanions() {

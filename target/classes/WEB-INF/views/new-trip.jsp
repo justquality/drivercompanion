@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>${formHeader}</title>
+<title>Create new trip</title>
 <link href="${contextPath}/resources/css/common.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
@@ -35,15 +35,13 @@
 		<%@include file="components/header.jsp"%>
 
 		<c:if test="${driver != null && empty driver.cars}">
-
 			<h4 class="text-center">
 				<font color="red">Add a car before managing a trip.</font>
 			</h4>
-
 		</c:if>
 
 		<form:form method="POST" modelAttribute="trip" class="form-new-trip">
-			<h2 class="form-heading">${formHeader}</h2>
+			<h2 class="form-heading">Create new trip</h2>
 
 			<spring:bind path="departure">
 				<div class="form-group ${status.error ? 'has-error' : ''}">

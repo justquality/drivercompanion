@@ -8,7 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,7 +32,7 @@ public class Car {
 	@Column(name = "PLACES")
 	private Byte places;
 	
-	@ManyToMany(mappedBy = "cars", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "car", fetch = FetchType.EAGER)
 	private Set<Driver> drivers;
 	
 	public Car() {}

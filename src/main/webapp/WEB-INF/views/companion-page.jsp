@@ -77,14 +77,61 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-					<a href="${contextPath}/user-${companion.user.username}/add-review"
+					<a
+						href="${contextPath}/companion-${companion.user.username}/add-review"
 						class="btn btn-lg btn-block btn-success">Add Review</a><br>
 				</div>
 			</div>
 		</div>
 
-		<!-- Trip list -->
-		<c:if test="${!empty trips}">
+		<!-- Open Trips -->
+		<c:if test="${!empty openTrips}">
+			<div class="row row-highlited">
+				<h3 class="text-center">Open Trips</h3>
+				<br>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<tr>
+							<th>#ID</th>
+							<th>Date</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Price</th>
+							<th colspan="2">Driver</th>
+						</tr>
+						<c:forEach var="trip" items="${openTrips}">
+							<tr>
+								<td>${trip.id}</td>
+								<td><fmt:formatDate var="date" pattern="dd/MM/yyyy"
+										value="${trip.date}" /> ${date}</td>
+								<td>${trip.departure}</td>
+								<td>${trip.arrival}</td>
+								<td>${trip.price}</td>
+								<td><c:choose>
+										<c:when test="${trip.driver != null}">
+											<a href="${contextPath}/driver-${trip.driver.user.username}">
+												${trip.driver.user.firstName}&nbsp;${trip.driver.user.lastName}
+											</a>&nbsp;(${trip.driver.user.phone})
+										</c:when>
+										<c:otherwise>
+											Currently no driver
+										</c:otherwise>
+									</c:choose></td>
+								<td><c:if test="${trip.driver == null}">
+										<form:form method="POST"
+											action="${contextPath}/companion-${companion.user.username}/become-driver-trip-${trip.id}">
+											<button class="btn btn-success" type="submit">Become Driver</button>
+										</form:form>
+									</c:if></td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</c:if>
+
+		<!-- Closed Trips -->
+		<c:if test="${!empty closedTrips}">
 			<div class="row row-highlited">
 				<h3 class="text-center">Closed Trips</h3>
 				<br>
@@ -98,7 +145,7 @@
 							<th>Price</th>
 							<th>Driver</th>
 						</tr>
-						<c:forEach var="trip" items="${trips}">
+						<c:forEach var="trip" items="${closedTrips}">
 							<tr>
 								<td>${trip.id}</td>
 								<td><fmt:formatDate var="date" pattern="dd/MM/yyyy"
@@ -108,12 +155,12 @@
 								<td>${trip.price}</td>
 								<td><c:choose>
 										<c:when test="${trip.driver != null}">
-											<a href="${contextPath}/user-${trip.driver.user.username}">
+											<a href="${contextPath}/driver-${trip.driver.user.username}">
 												${trip.driver.user.firstName}&nbsp;${trip.driver.user.lastName}
 											</a>&nbsp;(${trip.driver.user.phone})
 										</c:when>
 										<c:otherwise>
-											Currently no driver
+											No driver
 										</c:otherwise>
 									</c:choose></td>
 							</tr>
@@ -125,17 +172,18 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<h3 class="text-center">${companion.user.firstName}'s reviews</h3>
+				<h3 class="text-center">${companion.user.firstName}'s&nbsp;reviews</h3>
 				<c:choose>
 					<c:when test="${!empty companion.user.authorReviews}">
 						<ul class="reviews">
 							<c:forEach var="review" items="${companion.user.authorReviews}">
-								<%@include file="components/review.jsp"%>
+								<%@include file="components/review-about-driver.jsp"%>
 							</c:forEach>
 						</ul>
 					</c:when>
 					<c:otherwise>
-						<p class="text-center">${companion.user.firstName} did not write any reviews yet.</p>
+						<p class="text-center">${companion.user.firstName}did&nbsp;not&nbsp;write
+							any reviews yet.</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -149,12 +197,13 @@
 					<c:when test="${!empty companion.user.targetReviews}">
 						<ul class="reviews">
 							<c:forEach var="review" items="${companion.user.targetReviews}">
-								<%@include file="components/review.jsp"%>
+								<%@include file="components/review-about-companion.jsp"%>
 							</c:forEach>
 						</ul>
 					</c:when>
 					<c:otherwise>
-						<p class="text-center">There are no reviews about ${companion.user.firstName}.</p>
+						<p class="text-center">There are no reviews about
+							${companion.user.firstName}.</p>
 						<br>
 					</c:otherwise>
 				</c:choose>

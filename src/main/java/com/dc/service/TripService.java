@@ -9,10 +9,10 @@ import com.dc.model.Trip;
 public interface TripService {
 	void save(Trip trip);
 	Trip findOne(Long id);
-	Trip findByIdAndDriver(Long id, Driver driver);
-	Trip findByIdAndCompanions(Long id, Companion companion);
+	Trip findByDriverAndCompanions(Driver driver, Companion companion);
 	Set<Trip> findByDriver(Driver driver);
 	Set<Trip> findByCompanions(Companion companion);
-	Set<Trip> findByDriverAndCompanions(Driver driver, Companion companion);
+	Set<Trip> findByDriverAndClosed(Driver driver, Boolean bool);
+	Set<Trip> findByCompanionsAndClosed(Companion companion, Boolean bool);
 	void delete(Long id);
 }

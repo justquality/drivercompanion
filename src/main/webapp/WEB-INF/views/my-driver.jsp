@@ -197,10 +197,10 @@
 			</div>
 		</div>
 
-		<!-- Trip list -->
-		<c:if test="${!empty trips}">
+		<!-- Open Trips -->
+		<c:if test="${!empty openTrips}">
 			<div class="row row-highlited">
-				<h3 class="text-center">My Trips</h3>
+				<h3 class="text-center">Open Trips</h3>
 				<br>
 				<div class="table-responsive">
 					<table class="table table-striped">
@@ -212,7 +212,7 @@
 							<th>Price</th>
 							<th colspan="3">Companions</th>
 						</tr>
-						<c:forEach var="trip" items="${trips}">
+						<c:forEach var="trip" items="${openTrips}">
 							<tr>
 								<td>${trip.id}</td>
 								<td><fmt:formatDate var="date" pattern="dd/MM/yyyy"
@@ -225,7 +225,7 @@
 											<c:when test="${!empty trip.companions}">
 												<c:forEach var="companion" items="${trip.companions}">
 													<li><a
-														href="${contextPath}/user-${companion.user.username}">
+														href="${contextPath}/companion-${companion.user.username}">
 															${companion.user.firstName}&nbsp;${companion.user.lastName}
 													</a>&nbsp;(${companion.user.phone})</li>
 												</c:forEach>
@@ -235,10 +235,61 @@
 											</c:otherwise>
 										</c:choose>
 									</ul></td>
-								<td><a href="${contextPath}/my-driver/edit-trip-${trip.id}">Edit</a></td>
+								<td><form:form method="POST"
+										action="${contextPath}/my-driver/close-trip-${trip.id}">
+										<button class="btn btn-success" type="submit">Close</button>
+									</form:form></td>
 								<td><c:if test="${empty trip.companions}">
-										<a href="${contextPath}/my-driver/delete-trip-${trip.id}">Delete</a>
+										<form:form method="POST"
+											action="${contextPath}/my-driver/delete-trip-${trip.id}">
+											<button class="btn btn-danger" type="submit">Delete</button>
+										</form:form>
 									</c:if></td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+		</c:if>
+
+		<!-- Closed Trips -->
+		<c:if test="${!empty closedTrips}">
+			<div class="row row-highlited">
+				<h3 class="text-center">Closed Trips</h3>
+				<br>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<tr>
+							<th>#ID</th>
+							<th>Date</th>
+							<th>From</th>
+							<th>To</th>
+							<th>Price</th>
+							<th>Companions</th>
+						</tr>
+						<c:forEach var="trip" items="${closedTrips}">
+							<tr>
+								<td>${trip.id}</td>
+								<td><fmt:formatDate var="date" pattern="dd/MM/yyyy"
+										value="${trip.date}" /> ${date}</td>
+								<td>${trip.departure}</td>
+								<td>${trip.arrival}</td>
+								<td>${trip.price}&nbsp;MDL</td>
+								<td><ul>
+										<c:choose>
+											<c:when test="${!empty trip.companions}">
+												<c:forEach var="companion" items="${trip.companions}">
+													<li><a
+														href="${contextPath}/companion-${companion.user.username}">
+															${companion.user.firstName}&nbsp;${companion.user.lastName}
+													</a>&nbsp;(${companion.user.phone})</li>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<li>No companions</li>
+											</c:otherwise>
+										</c:choose>
+									</ul></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -253,7 +304,7 @@
 					<c:when test="${!empty driver.user.authorReviews}">
 						<ul class="reviews">
 							<c:forEach var="review" items="${driver.user.authorReviews}">
-								<%@include file="components/review.jsp"%>
+								<%@include file="components/review-about-companion.jsp"%>
 							</c:forEach>
 						</ul>
 					</c:when>
@@ -272,7 +323,7 @@
 					<c:when test="${!empty driver.user.targetReviews}">
 						<ul class="reviews">
 							<c:forEach var="review" items="${driver.user.targetReviews}">
-								<%@include file="components/review.jsp"%>
+								<%@include file="components/review-about-driver.jsp"%>
 							</c:forEach>
 						</ul>
 					</c:when>

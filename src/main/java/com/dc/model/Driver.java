@@ -1,7 +1,5 @@
 package com.dc.model;
 
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,18 +31,17 @@ public class Driver {
 	@Column(name = "RATING")
 	private Float rating = (float) 0;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "DRIVERS_CARS", joinColumns = @JoinColumn(name = "ID_DRIVER"),
-			inverseJoinColumns = @JoinColumn(name = "ID_CAR"))
-	private Set<Car> cars;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_CAR")
+	private Car car;
 
 	public Driver() {}
 
-	public Driver(User user, Byte experience, Float rating, Set<Car> cars) {
+	public Driver(User user, Byte experience, Float rating, Car car) {
 		this.user = user;
 		this.experience = experience;
 		this.rating = rating;
-		this.cars = cars;
+		this.car = car;
 	}
 
 	public Long getId() {
@@ -80,12 +76,12 @@ public class Driver {
 		this.rating = rating;
 	}
 
-	public Set<Car> getCars() {
-		return cars;
+	public Car getCar() {
+		return car;
 	}
 
-	public void setCars(Set<Car> cars) {
-		this.cars = cars;
+	public void setCar(Car car) {
+		this.car = car;
 	}
 	
 }

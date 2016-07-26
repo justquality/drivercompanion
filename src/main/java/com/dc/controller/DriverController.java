@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -28,7 +29,8 @@ public class DriverController {
 		
 		Driver driver = driverService.findByUsername(username);
 		model.addAttribute("driver", driver);
-		model.addAttribute("trips", tripService.findByDriver(driver));
+		model.addAttribute("openTrips", tripService.findByDriverAndClosed(driver, false));
+		model.addAttribute("closedTrips", tripService.findByDriverAndClosed(driver, true));
 		
 		return "my-driver";
 	}
@@ -54,5 +56,18 @@ public class DriverController {
     	
     	return "redirect:/my-driver";
     }
+	
+	@RequestMapping(value = "/driver-{username}", method = RequestMethod.GET)
+	public String driverId(@PathVariable("username") String username, Model model) {
+		if (SecurityContextHolder.getContext().getAuthentication().getName().equals(username))
+			return "redirect:/my-profile";
+		
+		Driver driver = driverService.findByUsername(username);
+		model.addAttribute("driver", driver);
+		model.addAttribute("openTrips", tripService.findByDriverAndClosed(driver, false));
+		model.addAttribute("closedTrips", tripService.findByDriverAndClosed(driver, true));
+		
+		return "driver-page";
+	}
 	
 }

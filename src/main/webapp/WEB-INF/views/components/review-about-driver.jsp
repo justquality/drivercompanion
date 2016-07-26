@@ -8,7 +8,7 @@
 			<h4>
 				<c:choose>
 					<c:when test="${review.userAuthor != null}">
-						<a href="${contextPath}/user-${review.userAuthor.username}">
+						<a href="${contextPath}/companion-${review.userAuthor.username}">
 							${review.authorName}</a>
 					</c:when>
 					<c:otherwise>
@@ -28,7 +28,7 @@
 				<fmt:formatDate var="date" pattern="dd-MM-yyyy"
 					value="${review.date}" />
 				${date}, About <a
-					href="${contextPath}/user-${review.userTarget.username}">
+					href="${contextPath}/driver-${review.userTarget.username}">
 					${review.userTarget.firstName}&nbsp;${review.userTarget.lastName} </a>
 			</p>
 			<br>
