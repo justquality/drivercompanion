@@ -39,24 +39,34 @@
 		<div class="row">
 			<div class="container-fluid">
 				<div class="col-md-7">
-					<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
-					<h4>Cars:</h4>
-					<div class="table-responsive">
-						<table class="table table-striped">
-							<tr>
-								<th>#</th>
-								<th>Brand</th>
-								<th>Description</th>
-								<th>Places</th>
-							</tr>
-							<tr>
-								<td>car id</td>
-								<td>car brand</td>
-								<td>car description</td>
-								<td>car places</td>
-							</tr>
-						</table>
-					</div>
+					<c:choose>
+						<c:when test="${driver.car == null}">
+							<h4>This driver did not add any car yet.</h4>
+						</c:when>
+						<c:otherwise>
+							<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
+							<div class="table-responsive car-table">
+								<table class="table table-striped">
+									<tr>
+										<th>Brand</th>
+										<td>${driver.car.brand}</td>
+									</tr>
+									<tr>
+										<th>Year</th>
+										<td>${driver.car.year}</td>
+									</tr>
+									<tr>
+										<th>Type</th>
+										<td>${driver.car.type}</td>
+									</tr>
+									<tr>
+										<th>places</th>
+										<td>${driver.car.places}</td>
+									</tr>
+								</table>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="col-md-5">
 					<div class="driver-passport">
@@ -149,7 +159,7 @@
 										test="${fn:length(trip.companions) lt driver.car.places}">
 										<form:form method="POST"
 											action="${contextPath}/driver-${driver.user.username}/become-companion-trip-${trip.id}">
-											<button class="btn btn-success" type="submit">Become
+											<button class="btn btn-info" type="submit">Become
 												Companion</button>
 										</form:form>
 									</c:if>

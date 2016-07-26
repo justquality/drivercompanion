@@ -120,7 +120,7 @@
 								<td><c:if test="${trip.driver == null}">
 										<form:form method="POST"
 											action="${contextPath}/companion-${companion.user.username}/become-driver-trip-${trip.id}">
-											<button class="btn btn-success" type="submit">Become Driver</button>
+											<button class="btn btn-info" type="submit">Become Driver</button>
 										</form:form>
 									</c:if></td>
 							</tr>
