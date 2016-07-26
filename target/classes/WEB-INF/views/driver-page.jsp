@@ -39,9 +39,7 @@
 			<div class="container-fluid">
 				<div class="col-md-7">
 					<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
-					<h4>
-						Cars:
-					</h4>
+					<h4>Cars:</h4>
 					<div class="table-responsive">
 						<table class="table table-striped">
 							<tr>
@@ -101,6 +99,9 @@
 							</div>
 						</div>
 					</div>
+					<br>
+					<a href="${contextPath}/user-${driver.user.username}/add-review"
+						class="btn btn-lg btn-block btn-success">Add Review</a><br>
 				</div>
 			</div>
 		</div>
@@ -132,16 +133,17 @@
 										<c:choose>
 											<c:when test="${!empty trip.companions}">
 												<c:forEach var="companion" items="${trip.companions}">
-													<li><a href="${contextPath}/user-${companion.user.username}">
+													<li><a
+														href="${contextPath}/user-${companion.user.username}">
 															${companion.user.firstName}&nbsp;${companion.user.lastName}
 													</a>&nbsp;(${companion.user.phone})</li>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
-											<li>Currently no companions</li>
-										</c:otherwise>
+												<li>Currently no companions</li>
+											</c:otherwise>
 										</c:choose>
-								</ul></td>
+									</ul></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -151,7 +153,7 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				<h3 class="text-center">${driver.user.firstName}'s reviews</h3>
+				<h3 class="text-center">${driver.user.firstName}'sreviews</h3>
 				<c:choose>
 					<c:when test="${!empty driver.user.authorReviews}">
 						<ul class="reviews">
@@ -161,7 +163,8 @@
 						</ul>
 					</c:when>
 					<c:otherwise>
-						<p class="text-center">${driver.user.firstName} did not write any reviews yet.</p>
+						<p class="text-center">${driver.user.firstName}didnot write
+							any reviews yet.</p>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -180,7 +183,8 @@
 						</ul>
 					</c:when>
 					<c:otherwise>
-						<p class="text-center">There are no reviews about ${driver.user.firstName}.</p>
+						<p class="text-center">There are no reviews about
+							${driver.user.firstName}.</p>
 						<br>
 					</c:otherwise>
 				</c:choose>

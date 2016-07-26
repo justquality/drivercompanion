@@ -210,7 +210,7 @@
 							<th>From</th>
 							<th>To</th>
 							<th>Price</th>
-							<th>Companions</th>
+							<th colspan="3">Companions</th>
 						</tr>
 						<c:forEach var="trip" items="${trips}">
 							<tr>
@@ -235,6 +235,8 @@
 											</c:otherwise>
 										</c:choose>
 									</ul></td>
+								<td><a href="${contextPath}/my-driver/edit-trip-${trip.id}">Edit</a></td>
+								<td><a href="${contextPath}/my-driver/delete-trip-${trip.id}">Delete</a></td>
 							</tr>
 						</c:forEach>
 					</table>

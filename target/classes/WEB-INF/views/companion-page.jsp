@@ -76,7 +76,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6"></div>
+				<div class="col-md-6">
+					<a href="${contextPath}/user-${companion.user.username}/add-review"
+						class="btn btn-lg btn-block btn-success">Add Review</a><br>
+				</div>
 			</div>
 		</div>
 

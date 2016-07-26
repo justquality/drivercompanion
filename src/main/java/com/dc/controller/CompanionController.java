@@ -40,13 +40,14 @@ public class CompanionController {
 		if (bindingResult.hasErrors())
             return "my-companion";
 
-		Companion updateCompanion = companionService.findByUsername(companion.getUser().getUsername());
+		User user = companion.getUser();
+		Companion updateCompanion = companionService.findByUser(user);
 		
 		User updateUser = updateCompanion.getUser();
-    	updateUser.setFirstName(companion.getUser().getFirstName());
-    	updateUser.setLastName(companion.getUser().getLastName());
-    	updateUser.setEmail(companion.getUser().getEmail());
-    	updateUser.setPasswordConfirm(companion.getUser().getPasswordConfirm());
+    	updateUser.setFirstName(user.getFirstName());
+    	updateUser.setLastName(user.getLastName());
+    	updateUser.setEmail(user.getEmail());
+    	updateUser.setPasswordConfirm(user.getPasswordConfirm());
 		
     	companionService.save(updateCompanion);
 		

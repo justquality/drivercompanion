@@ -28,24 +28,24 @@ public class TripController {
 	@Autowired private CompanionService companionService;
 	@Autowired private TripValidator tripValidator; 
 
-	@RequestMapping(value = {"/my-driver/new-trip"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/my-driver/new-trip", "/my-companion/new-trip"}, method = RequestMethod.GET)
 	public String newDriverTrip(Model model) {
 		model.addAttribute("trip", new Trip());
-		return "my-driver/new-trip";
+		return "new-trip";
 	}
 	
-	@RequestMapping(value = {"/my-companion/new-trip"}, method = RequestMethod.GET)
-	public String newCompanionTrip(Model model) {
-		model.addAttribute("trip", new Trip());
-		return "my-companion/new-trip";
-	}
+//	@RequestMapping(value = {"/my-companion/new-trip"}, method = RequestMethod.GET)
+//	public String newCompanionTrip(Model model) {
+//		model.addAttribute("trip", new Trip());
+//		return "my-companion/new-trip";
+//	}
 	
 	@RequestMapping(value = {"/my-driver/new-trip"}, method = RequestMethod.POST)
 	public String newDriverTrip(@ModelAttribute("trip") Trip trip, BindingResult bindingResult, Model model) {
 		tripValidator.validate(trip, bindingResult);
 		
 		if (bindingResult.hasErrors())
-			return "my-driver/new-trip";
+			return "new-trip";
 		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Driver driver = driverService.findByUsername(username);
@@ -60,7 +60,7 @@ public class TripController {
 		tripValidator.validate(trip, bindingResult);
 		
 		if (bindingResult.hasErrors())
-			return "my-companion/new-trip";
+			return "new-trip";
 		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		@SuppressWarnings("serial")

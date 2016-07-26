@@ -101,7 +101,7 @@ table {
 }
 
 .reviews li {
-	display: inline-block;
+	display: block;
 }
 
 .reviews .review {

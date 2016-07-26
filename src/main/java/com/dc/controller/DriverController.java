@@ -40,14 +40,15 @@ public class DriverController {
     	if (bindingResult.hasErrors())
             return "my-driver";
     	
-    	Driver updateDriver = driverService.findByUsername(driver.getUser().getUsername());
+    	User user = driver.getUser();
+    	Driver updateDriver = driverService.findByUser(user);
     	updateDriver.setExperience(driver.getExperience());
     	
     	User updateUser = updateDriver.getUser();
-    	updateUser.setFirstName(driver.getUser().getFirstName());
-    	updateUser.setLastName(driver.getUser().getLastName());
-    	updateUser.setEmail(driver.getUser().getEmail());
-    	updateUser.setPasswordConfirm(driver.getUser().getPasswordConfirm());
+    	updateUser.setFirstName(user.getFirstName());
+    	updateUser.setLastName(user.getLastName());
+    	updateUser.setEmail(user.getEmail());
+    	updateUser.setPasswordConfirm(user.getPasswordConfirm());
     	
     	driverService.save(updateDriver);
     	

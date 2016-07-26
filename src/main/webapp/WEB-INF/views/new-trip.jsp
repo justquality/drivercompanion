@@ -32,7 +32,7 @@
 <body>
 	<div class="container">
 
-		<%@include file="../components/header.jsp"%>
+		<%@include file="components/header.jsp"%>
 
 		<form:form method="POST" modelAttribute="trip" class="form-new-trip">
 			<h2 class="form-heading">Create new trip</h2>
@@ -85,7 +85,7 @@
 			});
 		</script>
 
-		<%@include file="../components/footer.jsp"%>
+		<%@include file="components/footer.jsp"%>
 
 	</div>
 </body>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <li>
 	<div class="review">
@@ -24,7 +25,10 @@
 				&nbsp;(${review.mark})
 			</h4>
 			<p>
-				About <a href="${contextPath}/user-${review.userTarget.username}">
+				<fmt:formatDate var="date" pattern="dd-MM-yyyy"
+					value="${review.date}" />
+				${date}, About <a
+					href="${contextPath}/user-${review.userTarget.username}">
 					${review.userTarget.firstName}&nbsp;${review.userTarget.lastName} </a>
 			</p>
 			<br>

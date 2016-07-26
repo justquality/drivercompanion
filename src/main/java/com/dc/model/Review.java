@@ -1,5 +1,7 @@
 package com.dc.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "REVIEWS")
@@ -36,14 +40,19 @@ public class Review {
 	@Column(name = "COMMENT")
 	private String comment;
 	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "REVIEW_DATE")
+	private Date date;
+	
 	public Review() {}
 
-	public Review(User userAuthor, User userTarget, String authorName, Byte mark, String comment) {
+	public Review(User userAuthor, User userTarget, String authorName, Byte mark, String comment, Date date) {
 		this.userAuthor = userAuthor;
 		this.userTarget = userTarget;
 		this.authorName = authorName;
 		this.mark = mark;
 		this.comment = comment;
+		this.date = date;
 	}
 
 	public Long getId() {
@@ -92,6 +101,14 @@ public class Review {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 }
