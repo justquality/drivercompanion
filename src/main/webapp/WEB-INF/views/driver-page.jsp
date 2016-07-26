@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -144,11 +145,14 @@
 											</c:otherwise>
 										</c:choose>
 									</ul></td>
-								<td><form:form method="POST"
-										action="${contextPath}/driver-${driver.user.username}/become-companion-trip-${trip.id}">
-										<button class="btn btn-success" type="submit">Become
-											Companion</button>
-									</form:form>
+								<td><c:if
+										test="${fn:length(trip.companions) lt driver.car.places}">
+										<form:form method="POST"
+											action="${contextPath}/driver-${driver.user.username}/become-companion-trip-${trip.id}">
+											<button class="btn btn-success" type="submit">Become
+												Companion</button>
+										</form:form>
+									</c:if>
 							</tr>
 						</c:forEach>
 					</table>

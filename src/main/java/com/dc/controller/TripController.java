@@ -24,14 +24,10 @@ import com.dc.validator.TripValidator;
 @Controller
 public class TripController {
 
-	@Autowired
-	private TripService tripService;
-	@Autowired
-	private DriverService driverService;
-	@Autowired
-	private CompanionService companionService;
-	@Autowired
-	private TripValidator tripValidator;
+	@Autowired private TripService tripService;
+	@Autowired private DriverService driverService;
+	@Autowired private CompanionService companionService;
+	@Autowired private TripValidator tripValidator;
 
 	@RequestMapping(value = { "/my-driver/new-trip", "/my-companion/new-trip" }, method = RequestMethod.GET)
 	public String newTrip(Model model) {
@@ -108,6 +104,11 @@ public class TripController {
 	
 	@RequestMapping(value = { "/driver-{username}/become-companion-trip-{id}" }, method = RequestMethod.POST)
 	public String becomeCompanion(@PathVariable("id") Long id, Model model) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Trip trip = tripService.findOne(id);
+		trip.getCompanions().add(companionService.findByUsername(username));
+		tripService.save(trip);
+		
 		return "redirect:/my-companion";
 	}
 

@@ -34,7 +34,7 @@
 
 		<%@include file="components/header.jsp"%>
 
-		<c:if test="${driver != null && empty driver.cars}">
+		<c:if test="${driver != null && driver.car == null}">
 			<h4 class="text-center">
 				<font color="red">Add a car before managing a trip.</font>
 			</h4>
@@ -81,7 +81,7 @@
 			</spring:bind>
 			<br>
 			<button type="submit" class="btn btn-info"
-				<c:if test="${driver != null && empty driver.cars}">disabled</c:if>>Submit</button>
+				<c:if test="${driver != null && driver.car == null}">disabled</c:if>>Submit</button>
 			<br>
 			<br>
 		</form:form>

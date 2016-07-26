@@ -134,6 +134,10 @@ table {
 	display: block;
 }
 
+.car-table {
+	margin-top: 15px;
+}
+
 .driver-passport, .companion-passport, .search-form {
 	width: 100%;
 	padding: 20px;

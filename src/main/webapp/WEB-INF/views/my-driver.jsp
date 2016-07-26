@@ -122,27 +122,36 @@
 		<div class="row">
 			<div class="container-fluid">
 				<div class="col-md-7">
-					<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
-					<h4>
-						Cars:
-						<button type="button" class="btn btn-link" name="button">Edit</button>
-					</h4>
-					<div class="table-responsive">
-						<table class="table table-striped">
-							<tr>
-								<th>#</th>
-								<th>Brand</th>
-								<th>Description</th>
-								<th>Places</th>
-							</tr>
-							<tr>
-								<td>car id</td>
-								<td>car brand</td>
-								<td>car description</td>
-								<td>car places</td>
-							</tr>
-						</table>
-					</div>
+					<c:choose>
+						<c:when test="${driver.car == null}">
+							<h4>To be able to create trips you have to add a car.</h4>
+							<a class="btn btn-info" href="${contextPath}/my-driver/add-car">Add Car</a>
+						</c:when>
+						<c:otherwise>
+							<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
+							<a class="btn btn-info" href="${contextPath}/my-driver/edit-car">Edit Car</a>
+							<div class="table-responsive car-table">
+								<table class="table table-striped">
+									<tr>
+										<th>Brand</th>
+										<td>${driver.car.brand}</td>
+									</tr>
+									<tr>
+										<th>Year</th>
+										<td>${driver.car.year}</td>
+									</tr>
+									<tr>
+										<th>Type</th>
+										<td>${driver.car.type}</td>
+									</tr>
+									<tr>
+										<th>places</th>
+										<td>${driver.car.places}</td>
+									</tr>
+								</table>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="col-md-5">
 					<div class="driver-passport">
