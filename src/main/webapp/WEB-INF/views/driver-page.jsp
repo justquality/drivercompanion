@@ -60,7 +60,7 @@
 										<td>${driver.car.type}</td>
 									</tr>
 									<tr>
-										<th>places</th>
+										<th>Places</th>
 										<td>${driver.car.places}</td>
 									</tr>
 								</table>

@@ -1,5 +1,6 @@
 package com.dc.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.dc.model.Companion;
@@ -14,5 +15,7 @@ public interface TripService {
 	Set<Trip> findByCompanions(Companion companion);
 	Set<Trip> findByDriverAndClosed(Driver driver, Boolean bool);
 	Set<Trip> findByCompanionsAndClosed(Companion companion, Boolean bool);
+	List<Trip> findFirst10ByClosed(Boolean bool);
+	List<Trip> findFirst20ByClosed(Boolean bool);
 	void delete(Long id);
 }

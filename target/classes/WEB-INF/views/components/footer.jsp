@@ -4,7 +4,7 @@
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="${contextPath}/home">
+			<a class="navbar-brand" href="${contextPath}/my-profile">
 				<img alt="Logo" src="${contextPath}/resources/img/logo.png">
 			</a>
 		</div>

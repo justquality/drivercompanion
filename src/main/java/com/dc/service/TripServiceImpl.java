@@ -1,5 +1,6 @@
 package com.dc.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,16 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public Set<Trip> findByCompanionsAndClosed(Companion companion, Boolean bool) {
 		return tripRepository.findByCompanionsAndClosed(companion, bool);
+	}
+	
+	@Override
+	public List<Trip> findFirst10ByClosed(Boolean bool) {
+		return tripRepository.findFirst10ByClosed(bool);
+	}
+	
+	@Override
+	public List<Trip> findFirst20ByClosed(Boolean bool) {
+		return tripRepository.findFirst20ByClosed(bool);
 	}
 	
 	@Override

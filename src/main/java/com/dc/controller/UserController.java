@@ -26,11 +26,6 @@ public class UserController {
     @Autowired private DriverService driverService;
 	@Autowired private CompanionService companionService;
     @Autowired private UserValidator userValidator;
-
-    @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
-    public String home(Model model) {
-        return "home";
-    }
     
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {

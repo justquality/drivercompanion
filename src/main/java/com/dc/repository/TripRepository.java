@@ -1,5 +1,6 @@
 package com.dc.repository;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,6 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 	Set<Trip> findByCompanions(Companion companion);
 	Set<Trip> findByDriverAndClosed(Driver driver, Boolean bool);
 	Set<Trip> findByCompanionsAndClosed(Companion companion, Boolean bool);
+	List<Trip> findFirst10ByClosed(Boolean bool);
+	List<Trip> findFirst20ByClosed(Boolean bool);
 }

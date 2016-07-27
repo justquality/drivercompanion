@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -112,11 +113,40 @@
 			</div>
 		</c:if>
 
-		<section>Latest trips</section>
-
-		<section>Some reviews</section>
-
-		<section>Top drivers</section>
+		<div class="container-fluid">
+			<div class="row row-highlited">
+				<h3 class="text-center">Upcoming trips</h3><br>
+				<div class="table-responsive">
+				    <table class="table table-striped">
+						<tr>
+							<th>#</th>
+							<th>Driver</th>
+							<th>Departure</th>
+							<th>Arrival</th>
+							<th>Date</th>
+							<th>Price</th>
+						</tr>
+						<c:forEach var="trip" items="${trips}">
+							<tr>
+								<td>${trip.id}</td>
+								<td><a
+									href="${contextPath}/driver-${trip.driver.user.username}">
+										${trip.driver.user.firstName}&nbsp;${trip.driver.user.lastName}</a></td>
+								<td>${trip.departure}</td>
+								<td>${trip.arrival}</td>
+								<td><fmt:formatDate var="date" pattern="dd/MM/yyyy"
+										value="${trip.date}" /> ${date}</td>
+								<td>${trip.price}</td>
+							</tr>
+						</c:forEach>	        
+			        </table>
+				</div>
+			</div>
+	
+			<section>Some reviews</section>
+	
+			<section>Top drivers</section>
+		</div>
 
 		<%@include file="components/footer.jsp"%>
 

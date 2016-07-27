@@ -13,7 +13,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="${contextPath}/home">
+			<a class="navbar-brand" href="${contextPath}/my-profile">
 				<img alt="Logo" src="${contextPath}/resources/img/logo.png">
 			</a>
 		</div>
