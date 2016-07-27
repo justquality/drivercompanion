@@ -49,7 +49,7 @@
 								<table class="table table-striped">
 									<tr>
 										<th>Brand</th>
-										<td>${driver.car.brand}</td>
+										<td>${driver.car.brand.brand}</td>
 									</tr>
 									<tr>
 										<th>Year</th>

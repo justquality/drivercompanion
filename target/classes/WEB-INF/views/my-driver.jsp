@@ -82,7 +82,7 @@
 								<form:label path="experience">Experience: </form:label>
 								<form:input id="driv-exp" data-slider-id="driv-exp-slider"
 									type="text" data-slider-min="0" data-slider-max="50"
-									data-slider-step="1" data-slider-value="${experience}"
+									data-slider-step="1" data-slider-value="${driver.experience}"
 									path="experience" />
 								<script>
 									$('#driv-exp').slider({
@@ -125,16 +125,18 @@
 					<c:choose>
 						<c:when test="${driver.car == null}">
 							<h4>To be able to create trips you have to add a car.</h4>
-							<a class="btn btn-info" href="${contextPath}/my-driver/add-car">Add Car</a>
+							<a class="btn btn-info" href="${contextPath}/my-driver/add-car">Add
+								Car</a>
 						</c:when>
 						<c:otherwise>
 							<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
-							<a class="btn btn-info" href="${contextPath}/my-driver/edit-car">Edit Car</a>
+							<a class="btn btn-info" href="${contextPath}/my-driver/edit-car">Edit
+								Car</a>
 							<div class="table-responsive car-table">
 								<table class="table table-striped">
 									<tr>
 										<th>Brand</th>
-										<td>${driver.car.brand}</td>
+										<td>${driver.car.brand.brand}</td>
 									</tr>
 									<tr>
 										<th>Year</th>

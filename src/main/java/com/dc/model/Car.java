@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,8 +22,9 @@ public class Car {
 	@Column(name = "ID_CAR")
 	private Long id;
 	
-	@Column(name = "BRAND")
-	private String brand;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_BRAND")
+	private Brand brand;
 	
 	@Column(name = "YEAR")
 	private Short year;
@@ -37,7 +40,7 @@ public class Car {
 	
 	public Car() {}
 
-	public Car(String brand, Short year, String type, Byte places, Set<Driver> drivers) {
+	public Car(Brand brand, Short year, String type, Byte places, Set<Driver> drivers) {
 		this.brand = brand;
 		this.year = year;
 		this.type = type;
@@ -53,11 +56,11 @@ public class Car {
 		this.id = id;
 	}
 
-	public String getBrand() {
+	public Brand getBrand() {
 		return brand;
 	}
 
-	public void setBrand(String brand) {
+	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
 
