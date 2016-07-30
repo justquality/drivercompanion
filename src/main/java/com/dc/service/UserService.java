@@ -7,4 +7,5 @@ public interface UserService {
 	void saveDriverUser(User user);
 	void saveCompanionUser(User user);
 	User findByUsername(String username);
+	void delete(User user);
 }

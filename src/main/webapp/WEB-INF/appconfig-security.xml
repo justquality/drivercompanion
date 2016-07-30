@@ -12,6 +12,7 @@
         <intercept-url pattern="/home" access="permitAll"/>
         
         <intercept-url pattern="/my-profile" access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/delete-profile" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/driver-*" access="hasRole('ROLE_USER')"/>
         <intercept-url pattern="/companion-*" access="hasRole('ROLE_USER')"/>
         

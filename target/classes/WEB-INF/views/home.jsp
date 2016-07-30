@@ -3,6 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -115,9 +116,10 @@
 
 		<div class="container-fluid">
 			<div class="row row-highlited">
-				<h3 class="text-center">Upcoming trips</h3><br>
+				<h3 class="text-center">Upcoming trips</h3>
+				<br>
 				<div class="table-responsive">
-				    <table class="table table-striped">
+					<table class="table table-striped">
 						<tr>
 							<th>#</th>
 							<th>Driver</th>
@@ -138,14 +140,79 @@
 										value="${trip.date}" /> ${date}</td>
 								<td>${trip.price}</td>
 							</tr>
-						</c:forEach>	        
-			        </table>
+						</c:forEach>
+					</table>
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<h3 class="text-center">Recent reviews</h3>
+					<c:if test="${!empty reviews}">
+						<ul class="reviews">
+							<c:forEach var="review" items="${reviews}">
+								<li>
+									<div class="review">
+										<img src="img/user-thumb.jpg" class="img-circle review-photo"
+											alt="" />
+										<div class="review-body">
+											<h4>
+												${review.authorName}&nbsp;
+												<c:forEach begin="1" end="${review.mark}" var="i">
+													<span class="glyphicon glyphicon-star"></span>
+												</c:forEach>
+												<c:forEach begin="1" end="${5 - review.mark}" var="i">
+													<span class="glyphicon glyphicon-star-empty"></span>
+												</c:forEach>
+												&nbsp;(${review.mark})
+											</h4>
+											<p>
+												<fmt:formatDate var="date" pattern="dd-MM-yyyy"
+													value="${review.date}" />
+												${date}, About&nbsp;
+												${review.userTarget.firstName}&nbsp;${review.userTarget.lastName}
+											</p>
+											<br>
+											<p>${review.comment}</p>
+										</div>
+									</div>
+								</li>
+							</c:forEach>
+						</ul>
+					</c:if>
 				</div>
 			</div>
-	
-			<section>Some reviews</section>
-	
-			<section>Top drivers</section>
+
+			<div class="row row-highlited">
+				<h3 class="text-center">Top drivers</h3>
+				<br>
+				<div class="col-xs-0 col-sm-1 col-md-2"></div>
+				<c:set var="end" value="${fn:length(drivers)}" />
+				<div class="col-xs-6 col-sm-4 col-md-3">
+					<ol class="top10">
+						<c:forEach begin="0" end="4" var="i">
+							<li><a
+								href="${contextPath}/driver-${drivers[i].user.username}">
+									${drivers[i].user.firstName}&nbsp;${drivers[i].user.lastName}&nbsp;</a>
+								${drivers[i].rating}</li>
+						</c:forEach>
+					</ol>
+				</div>
+				<div class="col-xs-0 col-sm-1 col-md-1"></div>
+				<div class="col-xs-0 col-sm-1 col-md-1"></div>
+				<div class="col-xs-6 col-sm-4 col-md-3">
+					<ol class="top10">
+						<c:forEach begin="5" end="9" var="i">
+							<li><a
+								href="${contextPath}/driver-${drivers[i].user.username}">
+									${drivers[i].user.firstName}&nbsp;${drivers[i].user.lastName}&nbsp;</a>
+								${drivers[i].rating}</li>
+						</c:forEach>
+					</ol>
+				</div>
+				<div class="col-xs-0 col-sm-1 col-md-2"></div>
+			</div>
 		</div>
 
 		<%@include file="components/footer.jsp"%>

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dc.model.Driver;
+import com.dc.model.Review;
 import com.dc.model.Trip;
 import com.dc.service.DriverService;
+import com.dc.service.ReviewService;
 import com.dc.service.TripService;
 
 @Controller
@@ -18,11 +20,16 @@ public class HomeController {
 	
 	@Autowired DriverService driverService;
 	@Autowired TripService tripService;
+	@Autowired ReviewService reviewService;
 
 	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String home(Model model) {
 		List<Trip> trips = tripService.findFirst10ByClosed(false);
+		List<Review> reviews = reviewService.findTop3ByMark((byte) 5);
+		List<Driver> drivers = driverService.findTop10ByRating();
 		model.addAttribute("trips", trips);
+		model.addAttribute("reviews", reviews);
+		model.addAttribute("drivers", drivers);
 		
         return "home";
     }

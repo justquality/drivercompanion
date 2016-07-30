@@ -165,7 +165,7 @@ table {
 	z-index: 1;
 }
 
-.form-new-trip, .form-car {
+.form-new-trip, .form-car, .form-delete-user {
 	max-width: 500px;
 	width: 100%;
 	margin: 0 auto;

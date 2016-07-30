@@ -40,4 +40,9 @@ public class DriverServiceImpl implements DriverService {
 		return driverRepository.findAll();
 	}
 
+	@Override
+	public List<Driver> findTop10ByRating() {
+		return driverRepository.findTop10ByRating();
+	}
+
 }

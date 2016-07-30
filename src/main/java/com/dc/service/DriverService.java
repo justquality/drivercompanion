@@ -11,4 +11,5 @@ public interface DriverService {
 	Driver findByUser(User user);
 	Driver findByUsername(String username);
 	List<Driver> findAll();
+	List<Driver> findTop10ByRating();
 }
