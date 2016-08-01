@@ -26,7 +26,7 @@ public class TripValidator implements Validator {
 			errors.rejectValue("arrival", "Same.trip.arrival");
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "price", "NotEmpty");
-		if (trip.getPrice() == null || trip.getPrice() < 1)
+		if (trip.getPrice() == null || trip.getPrice() < 1 || trip.getPrice() > 500)
 			errors.rejectValue("price", "Invalid.trip.price");
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "date", "NotEmpty");

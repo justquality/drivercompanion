@@ -45,4 +45,9 @@ public class DriverServiceImpl implements DriverService {
 		return driverRepository.findTop10ByRating();
 	}
 
+	@Override
+	public List<Driver> findByExperienceGreaterThanEqualAndExperienceLessThanEqual(Byte min, Byte max) {
+		return driverRepository.findByExperienceGreaterThanEqualAndExperienceLessThanEqual(min, max);
+	}
+
 }

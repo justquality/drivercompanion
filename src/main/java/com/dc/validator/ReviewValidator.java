@@ -19,7 +19,7 @@ public class ReviewValidator implements Validator {
 	public void validate(Object object, Errors errors) {
 		Review review = (Review) object;
 		
-		ValidationUtils.rejectIfEmpty(errors, "comment", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "comment", "NotEmpty");
 		if(review.getComment().length() < 10 || review.getComment().length() > 500)
 			errors.rejectValue("comment", "Size.review.comment");
 		

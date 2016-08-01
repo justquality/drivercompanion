@@ -23,21 +23,21 @@ public class CompanionValidator implements Validator {
 	public void validate(Object object, Errors errors) {
 		Companion companion = (Companion) object;
 		
-		ValidationUtils.rejectIfEmpty(errors, "user.firstName", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user.firstName", "NotEmpty");
 		if (companion.getUser().getFirstName().length() < 2 || companion.getUser().getFirstName().length() > 32)
 			errors.rejectValue("user.firstName", "Size.userForm.firstName");
 
-		ValidationUtils.rejectIfEmpty(errors, "user.lastName", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user.lastName", "NotEmpty");
 		if (companion.getUser().getLastName().length() < 2 || companion.getUser().getLastName().length() > 32)
 			errors.rejectValue("user.lastName", "Size.userForm.lastName");
 		
-		ValidationUtils.rejectIfEmpty(errors, "user.phone", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user.phone", "NotEmpty");
         Pattern pattern = Pattern.compile("\\b[0][67][0-9]{1}[-][0-9]{3}[-][0-9]{3}\\b");
         Matcher matcher = pattern.matcher(companion.getUser().getPhone());
         if (!matcher.matches())
         	errors.rejectValue("user.phone", "Format.userForm.phone");
 		
-		ValidationUtils.rejectIfEmpty(errors, "user.passwordConfirm", "NotEmpty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user.passwordConfirm", "NotEmpty");
 		if (!BCrypt.checkpw(companion.getUser().getPasswordConfirm(), companion.getUser().getPassword()))
 			errors.rejectValue("user.passwordConfirm", "Check.userForm.passwordConfirm");
 	}

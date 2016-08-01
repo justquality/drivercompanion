@@ -12,4 +12,5 @@ public interface DriverService {
 	Driver findByUsername(String username);
 	List<Driver> findAll();
 	List<Driver> findTop10ByRating();
+	List<Driver> findByExperienceGreaterThanEqualAndExperienceLessThanEqual(Byte min, Byte max);
 }

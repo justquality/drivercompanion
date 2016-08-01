@@ -1,5 +1,6 @@
 package com.dc.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -60,6 +61,52 @@ public class TripServiceImpl implements TripService {
 	@Override
 	public List<Trip> findFirst20ByClosed(Boolean bool) {
 		return tripRepository.findFirst20ByClosed(bool);
+	}
+	
+	@Override
+	public List<Trip> findByDateAndPriceLessThanEqualAndDriverIn(Date date, Double price, List<Driver> drivers) {
+		return tripRepository.findByDateAndPriceLessThanEqualAndDriverIn(date, price, drivers);
+	}
+
+	@Override
+	public List<Trip> findByDepartureAndDateAndPriceLessThanEqualAndDriverIn(String departure, Date date, Double price,
+			List<Driver> drivers) {
+		return tripRepository.findByDepartureAndDateAndPriceLessThanEqualAndDriverIn(departure, date, price, drivers);
+	}
+
+	@Override
+	public List<Trip> findByArrivalAndDateAndPriceLessThanEqualAndDriverIn(String arrival, Date date, Double price,
+			List<Driver> drivers) {
+		return tripRepository.findByArrivalAndDateAndPriceLessThanEqualAndDriverIn(arrival, date, price, drivers);
+	}
+
+	@Override
+	public List<Trip> findByDepartureAndArrivalAndDateAndPriceLessThanEqualAndDriverIn(String departure, String arrival,
+			Date date, Double price, List<Driver> drivers) {
+		return tripRepository.findByDepartureAndArrivalAndDateAndPriceLessThanEqualAndDriverIn(departure, arrival, date, price, drivers);
+	}
+
+	@Override
+	public List<Trip> findByDateAndPriceLessThanEqualAndDriverIsNull(Date date, Double price) {
+		return tripRepository.findByDateAndPriceLessThanEqualAndDriverIsNull(date, price);
+	}
+
+	@Override
+	public List<Trip> findByDepartureAndDateAndPriceLessThanEqualAndDriverIsNull(String departure, Date date,
+			Double price) {
+		return tripRepository.findByDepartureAndDateAndPriceLessThanEqualAndDriverIsNull(departure, date, price);
+	}
+
+	@Override
+	public List<Trip> findByArrivalAndDateAndPriceLessThanEqualAndDriverIsNull(String arrival, Date date,
+			Double price) {
+		return tripRepository.findByArrivalAndDateAndPriceLessThanEqualAndDriverIsNull(arrival, date, price);
+	}
+
+	@Override
+	public List<Trip> findByDepartureAndArrivalAndDateAndPriceLessThanEqualAndDriverIsNull(String departure,
+			String arrival, Date date, Double price) {
+		return tripRepository.findByDepartureAndArrivalAndDateAndPriceLessThanEqualAndDriverIsNull(departure, arrival, date, price);
 	}
 	
 	@Override

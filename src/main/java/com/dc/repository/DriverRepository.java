@@ -12,4 +12,5 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
 	Driver findByUser(User user);
 	@Query(value = "select * from DRIVERS order by RATING desc limit 10", nativeQuery = true)
 	List<Driver> findTop10ByRating();
+	List<Driver> findByExperienceGreaterThanEqualAndExperienceLessThanEqual(Byte min, Byte max);
 }
