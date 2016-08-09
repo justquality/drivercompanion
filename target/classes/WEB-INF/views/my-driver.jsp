@@ -131,7 +131,7 @@
 								Car</a>
 						</c:when>
 						<c:otherwise>
-							<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
+							<img class="car-thumb" src="${contextPath}/resources/img/car-thumb.png" alt="Car" />
 							<a class="btn btn-info" href="${contextPath}/my-driver/edit-car">Edit
 								Car</a>
 							<div class="table-responsive car-table">
@@ -162,7 +162,7 @@
 						<div class="media">
 							<span class="media-left"> <img
 								class="media-object driver-prof-img img-thumbnail"
-								src="img/driver-thumb.jpg" alt="Profile image"><br>
+								src="${contextPath}/resources/img/user-thumb.png" alt="Profile image"><br>
 								<button type="button" data-toggle="modal"
 									data-target="#edit-profile-modal"
 									class="btn btn-sm btn-block btn-info" name="edit-profile">Edit</button>

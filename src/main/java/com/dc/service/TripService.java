@@ -11,7 +11,7 @@ import com.dc.model.Trip;
 public interface TripService {
 	void save(Trip trip);
 	Trip findOne(Long id);
-	Trip findByDriverAndCompanions(Driver driver, Companion companion);
+	Set<Trip> findByDriverAndCompanionsAndClosed(Driver driver, Companion companion, Boolean bool);
 	Set<Trip> findByDriver(Driver driver);
 	Set<Trip> findByCompanions(Companion companion);
 	Set<Trip> findByDriverAndClosed(Driver driver, Boolean bool);

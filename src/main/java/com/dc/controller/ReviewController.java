@@ -45,8 +45,8 @@ public class ReviewController {
 		Driver driver = driverService.findByUsername(username);
 		Companion author = companionService.findByUsername(current);
 		
-		Trip trip = tripService.findByDriverAndCompanions(driver, author);
-		if (null != trip && trip.getClosed()) {
+		Set<Trip> trips = tripService.findByDriverAndCompanionsAndClosed(driver, author, true);
+		if (!trips.isEmpty()) {
 			model.addAttribute("review", new Review());
 			model.addAttribute("author", userService.findByUsername(current));
 		} else
@@ -100,8 +100,8 @@ public class ReviewController {
 		Companion companion = companionService.findByUsername(username);
 		Driver author = driverService.findByUsername(current);
 
-		Trip trip = tripService.findByDriverAndCompanions(author, companion);
-		if (null != trip && trip.getClosed()) {
+		Set<Trip> trips = tripService.findByDriverAndCompanionsAndClosed(author, companion, true);
+		if (!trips.isEmpty()) {
 			model.addAttribute("review", new Review());
 			model.addAttribute("author", userService.findByUsername(current));
 		} else

@@ -154,7 +154,7 @@
 							<c:forEach var="review" items="${reviews}">
 								<li>
 									<div class="review">
-										<img src="img/user-thumb.jpg" class="img-circle review-photo"
+										<img src="${contextPath}/resources/img/user-thumb.png" class="img-circle review-photo"
 											alt="" />
 										<div class="review-body">
 											<h4>

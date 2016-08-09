@@ -42,7 +42,7 @@
 						<div class="media">
 							<span class="media-left"> <img
 								class="media-object companion-prof-img img-thumbnail"
-								src="img/driver-thumb.jpg" alt="Profile image"><br>
+								src="${contextPath}/resources/img/user-thumb.png" alt="Profile image"><br>
 							</span>
 							<div class="media-body">
 								<h4 class="media-heading">Personal Data</h4>

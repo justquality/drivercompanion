@@ -113,7 +113,7 @@
 						<div class="media">
 							<span class="media-left"> <img
 								class="media-object companion-prof-img img-thumbnail"
-								src="img/driver-thumb.jpg" alt="Profile image"><br>
+								src="${contextPath}/resources/img/user-thumb.png" alt="Profile image"><br>
 								<button type="button" data-toggle="modal"
 									data-target="#edit-profile-modal"
 									class="btn btn-sm btn-block btn-info" name="edit-profile">Edit</button>

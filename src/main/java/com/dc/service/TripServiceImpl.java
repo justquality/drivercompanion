@@ -29,8 +29,8 @@ public class TripServiceImpl implements TripService {
 	}
 	
 	@Override
-	public Trip findByDriverAndCompanions(Driver driver, Companion companion) {
-		return tripRepository.findByDriverAndCompanions(driver, companion);
+	public Set<Trip> findByDriverAndCompanionsAndClosed(Driver driver, Companion companion, Boolean bool) {
+		return tripRepository.findByDriverAndCompanionsAndClosed(driver, companion, bool);
 	}
 
 	@Override

@@ -51,6 +51,7 @@ public class TripController {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Driver driver = driverService.findByUsername(username);
 		trip.setDriver(driver);
+		trip.setClosed(false);
 		tripService.save(trip);
 
 		return "redirect:/my-driver";
@@ -71,6 +72,7 @@ public class TripController {
 			}
 		};
 		trip.setCompanions(companions);
+		trip.setClosed(false);
 		tripService.save(trip);
 
 		return "redirect:/my-companion";

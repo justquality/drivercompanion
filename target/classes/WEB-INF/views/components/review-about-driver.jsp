@@ -3,7 +3,7 @@
 
 <li>
 	<div class="review">
-		<img src="img/user-thumb.jpg" class="img-circle review-photo" alt="" />
+		<img src="${contextPath}/resources/img/user-thumb.png" class="img-circle review-photo" alt="" />
 		<div class="review-body">
 			<h4>
 				<c:choose>

@@ -44,7 +44,7 @@
 							<h4>This driver did not add any car yet.</h4>
 						</c:when>
 						<c:otherwise>
-							<img class="car-thumb" src="img/car-thumb.svg" alt="Car" />
+							<img class="car-thumb" src="${contextPath}/resources/img/car-thumb.png" alt="Car" />
 							<div class="table-responsive car-table">
 								<table class="table table-striped">
 									<tr>
@@ -73,7 +73,7 @@
 						<div class="media">
 							<span class="media-left"> <img
 								class="media-object driver-prof-img img-thumbnail"
-								src="img/driver-thumb.jpg" alt="Profile image"><br>
+								src="${contextPath}/resources/img/user-thumb.png" alt="Profile image"><br>
 							</span>
 							<div class="media-body">
 								<h4 class="media-heading">Personal Data</h4>
