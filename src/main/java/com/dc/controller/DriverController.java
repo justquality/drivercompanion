@@ -38,7 +38,7 @@ public class DriverController {
 	@RequestMapping(value = "/my-driver", method = RequestMethod.POST)
     public String myDriver(@ModelAttribute("driver") Driver driver, BindingResult bindingResult, Model model) {
 		driverValidator.validate(driver, bindingResult);
-    	
+		
     	if (bindingResult.hasErrors())
             return "my-driver";
     	

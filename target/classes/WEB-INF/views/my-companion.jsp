@@ -48,6 +48,7 @@
 
 						<form:form method="POST" modelAttribute="companion"
 							action="${contextPath}/my-companion" class="form-companion-edit">
+							<form:hidden path="user.id" />
 							<form:hidden path="user.username" />
 							<spring:bind path="user.firstName">
 								<div class="form-group ${status.error ? 'has-error' : ''}">
