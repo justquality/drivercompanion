@@ -21,3 +21,5 @@ target
 #database
 #pom.xml
 #/batubara-online-core/src/main/resources/jdbc.properties
+
+.DS_Store
